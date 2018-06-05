@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	   http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+    <bean class="nurteen.prometheus.pc.framework.BeanPostProcessor"
+          id="beanPostProcessor$forApplicationContext">
+    </bean>
+
+    <bean class="nurteen.prometheus.pc.framework.DefaultAccountDBAware"
+          id="defaultUserDBAware">
+    </bean>
+
+    <bean class="nurteen.prometheus.pc.framework.DefaultRedisAware"
+          id="defaultRedisAware">
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          id="propertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:sysconfig.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--
+    <bean class="com.prometheus.pc.center.server.common.transfer.bean.RedisAware"
+          id="redisAware">
+    </bean>
+    -->
+
+    <context:annotation-config/>
+    <context:component-scan base-package="nurteen.prometheus.pc.center.server.service"/>
+
+    <!--
+    <context:component-scan base-package="com.prometheus.pc.center.server.common.transfer.websocket.service">
+    </context:component-scan>
+    <context:component-scan base-package="com.prometheus.pc.center.server.common.controller">
+    </context:component-scan>
+    -->
+</beans>
