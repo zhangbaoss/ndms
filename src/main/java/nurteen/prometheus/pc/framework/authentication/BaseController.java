@@ -1,5 +1,7 @@
 package nurteen.prometheus.pc.framework.authentication;
 
+import nurteen.prometheus.pc.framework.ObjectFactory;
+import nurteen.prometheus.pc.framework.Constants;
 import nurteen.prometheus.pc.framework.authentication.annotation.AuthValidate;
 import nurteen.prometheus.pc.framework.exception.PermissionDeniedException;
 import nurteen.prometheus.pc.framework.utils.CookieUtils;
@@ -32,15 +34,12 @@ public class BaseController {
 
         // 检查是否登录过
         String accessToken = CookieUtils.getAccessToken(request);
-        if (accessToken == null) {
+        if ((accessToken != null) && ObjectFactory.cacheAware.hasAccessToken(accessToken)) {
+            ObjectFactory.cacheAware.updateAccessToken(accessToken, Constants.DEFAULT_SESSION_TIMEOUT);
+        }
+        else {
+            System.out.println("Access Token not found or Access Token has been expired.");
             throw new PermissionDeniedException();
         }
-
-        /*
-        // 检查Redis是否过期
-        else if () {
-
-        }
-        */
     }
 }

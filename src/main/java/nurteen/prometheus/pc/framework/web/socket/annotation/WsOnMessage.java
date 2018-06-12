@@ -8,8 +8,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface WsOnMessage {
-    @AliasFor("url")
-    String value() default "";
-    @AliasFor("value")
     String url() default "";
 }

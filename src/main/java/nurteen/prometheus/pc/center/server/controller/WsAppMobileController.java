@@ -1,38 +1,38 @@
 package nurteen.prometheus.pc.center.server.controller;
 
-import nurteen.prometheus.pc.framework.authentication.entities.LoginArgs;
-import nurteen.prometheus.pc.framework.utils.WsUtils;
-import nurteen.prometheus.pc.framework.web.socket.WsMsg;
-import nurteen.prometheus.pc.framework.web.socket.WsServer;
+import nurteen.prometheus.pc.framework.web.socket.*;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsController;
-import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnClose;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
-import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnOpen;
 
 @WsController
 public class WsAppMobileController {
 
-    @WsOnOpen
-    public void onOpen(WsServer wsServer) {
-        System.out.println("onOpen");
-    }
-    @WsOnClose
-    public void onClose(WsServer wsServer) {
-        System.out.println("onClose");
-    }
     @WsOnMessage(url = "/test/gggggg")
-    public String testgggggg(WsMsg<String> msg) {
+    public String testgggggg(WsMessage msg) {
         System.out.println("onMessage: " + msg.getPayload());
         return "test";
     }
     @WsOnMessage(url = "/test/gggggg/g")
-    public void testggggggg(WsMsg<LoginArgs> msg) {
-        System.out.println("onMessage: " + msg.getPayload().getAccount());
-        WsUtils.request("/uuuuuuuuuuuuuuuu", "中文");
+    public void testggggggg(WsMessage msg) {
+        System.out.println("onMessage: " + msg.getPayload());
+        /*
+        WsMessageDispatcher.request("/uuuuuuuuuuuuuuuu", "中文", new WsRouteResponse() {
+                    @Override
+                    public void result(String ndid, String url, boolean succes, String message) {
+                        System.out.println("WsRouteResponse" + message);
+                    }
+                },
+                new WsResponse<String>() {
+                    @Override
+                    public void reply(WsMessage<String> msg) {
+                        System.out.println("WsResponse" + msg.getPayload());
+                    }
+                });
+                */
         // return "test";
     }
-    @WsOnMessage(url = "/uuuuuuuuuuuuuuuu")
-    public void uuuuuuuuuuuuuuuu() {
+    @WsOnMessage(url = "/uuuuuuuuuuuuuuuu/hhhhhhhhhhhhhhhhhhh")
+    public void uuuuuuuuuuuuuuuu(WsMessage msg) {
         System.out.println("uuuuuuuuuuuuuuuu");
     }
 }

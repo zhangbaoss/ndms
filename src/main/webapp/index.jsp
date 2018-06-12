@@ -11,6 +11,7 @@
 </div>
 
 <script type="text/javascript">
+    /*
     var replyCallbacks = {};
     function addReplyCallback(url, sequence, callback) {
         var callbacks = replyCallbacks[url];
@@ -30,17 +31,16 @@
     var ws = new WebSocket('ws://localhost:8080/app/mobile?nuid=nuid:gggg&ndid=ndid:ggg&access-token=xxx&secret-key=gggg');
     ws.onopen = function open(event) {
         console.log('websocket connected.');
-        /*
         var request = {
             url: '/test',
             sequence: 1,
             parameter: '{}'
         };
         ws.send(JSON.stringify(request));
-        */
+
     };
-    ws.onmessage = function message(event) {
-        console.log('websocket recv message ' + event.data);
+    ws.onmessage = function reason(event) {
+        console.log('websocket recv reason ' + event.data);
         var reply = JSON.parse(event.data);
         console.log(reply);
 
@@ -77,7 +77,7 @@
         wsSend($('#url_for_send').val(), { text: $('#message_for_send').val() }, function (data) {
             console.log('hhhhhhhhhhhh', data);
         });
-    }
+    }*/
 </script>
 </body>
 </html>

@@ -13,32 +13,55 @@
 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	   http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-    <bean class="nurteen.prometheus.pc.framework.BeanPostProcessor"
-          id="beanPostProcessor$forApplicationContext">
+    <bean class="nurteen.prometheus.pc.framework.BeanPostProcessor" id="beanPostProcessor$forApplicationContext">
     </bean>
 
-    <bean class="nurteen.prometheus.pc.framework.DefaultAccountDBAware"
-          id="defaultUserDBAware">
-    </bean>
-
-    <bean class="nurteen.prometheus.pc.framework.DefaultRedisAware"
-          id="defaultRedisAware">
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          id="propertyPlaceholderConfigurer">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:sysconfig.properties</value>
+                <value>classpath:config.properties</value>
             </list>
         </property>
     </bean>
 
-    <!--
-    <bean class="com.prometheus.pc.center.server.common.transfer.bean.RedisAware"
-          id="redisAware">
+    <bean class="nurteen.prometheus.pc.framework.ServerConfigProperties" id="serverConfigProperties">
+        <property name="idGenPrefix" value="${server.idGenPrefix}"/>
+        <property name="serverAddress" value="${server.serverAddress}"/>
     </bean>
-    -->
+
+    <bean class="nurteen.prometheus.pc.framework.web.socket.WsMessageDispatcher" id="wsMessageDispatcher">
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="packagesToScan">
+            <list>
+                <value>nurteen.prometheus.pc.framework.entities</value>
+            </list>
+        </property>
+        <property name="dataSource">
+            <bean class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <property name="jdbcUrl" value="${mysql.url}"></property>
+                <property name="driverClass" value="${mysql.driver}"></property>
+                <property name="user" value="${mysql.username}"></property>
+                <property name="password" value="${mysql.password}"></property>
+
+                <property name="initialPoolSize" value="3"></property>
+                <property name="minPoolSize" value="2"></property>
+                <property name="maxPoolSize" value="60"></property>
+                <property name="acquireIncrement" value="8"></property>
+                <property name="maxStatements" value="60"></property>
+                <property name="maxStatementsPerConnection" value="8"></property>
+                <property name="maxIdleTime" value="1800"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"  />
 
     <context:annotation-config/>
     <context:component-scan base-package="nurteen.prometheus.pc.center.server.service"/>
