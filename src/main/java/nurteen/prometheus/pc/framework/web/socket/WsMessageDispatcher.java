@@ -1,17 +1,14 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
-import nurteen.prometheus.pc.framework.ObjectFactory;
-import nurteen.prometheus.pc.framework.Constants;
-import nurteen.prometheus.pc.framework.Response;
-import nurteen.prometheus.pc.framework.ServerProperties;
+import nurteen.prometheus.pc.framework.*;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
+import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.JsonUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -48,66 +45,90 @@ public class WsMessageDispatcher {
     }
     */
 
-    public static boolean request(HttpServletRequest request, String ndid, String url, String payload, long timeout, WsResponse response) {
-        WsEndpoint endpoint = fromNdid(ndid);
-        if (endpoint != null) {
-            return request(endpoint, url, ndid, payload, timeout, response);
-        }
-        return false;
+    public static void request(HttpServletRequest request, String ndid, String url, String payload, long timeout, WsResponse response) {
+        fromNdid(ndid, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                request(endpoint, url, ndid, payload, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject();
+            }
+        });
     }
 
-    public static boolean request(String ndid, String url, String payload, long timeout, WsResponse response) {
-        WsEndpoint endpoint = fromNdid(ndid);
-        if (endpoint != null) {
-            return request(endpoint, url, ndid, payload, timeout, response);
-        }
-        return false;
+    public static void request(String ndid, String url, String payload, long timeout, WsResponse response) {
+        fromNdid(ndid, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                request(endpoint, url, ndid, payload, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject();
+            }
+        });
     }
 
-    public static boolean request(WsMessage msg, String payload, long timeout, WsResponse response) {
-        return request(msg.message, payload, timeout, response);
+    public static void request(WsMessage msg, String payload, long timeout, WsResponse response) {
+        request(msg.message, payload, timeout, response);
     }
 
-    public static boolean request(WsMessage msg, long timeout, WsResponse response) {
-        return request(msg.message, timeout, response);
+    public static void request(WsMessage msg, long timeout, WsResponse response) {
+        request(msg.message, timeout, response);
     }
 
-    static boolean request(Message msg, String payload, long timeout, WsResponse response) {
-        WsEndpoint endpoint = fromNdid(msg.target);
-        if (endpoint != null) {
-            return request(endpoint, msg, payload, timeout, response);
-        }
-        return false;
+    static void request(Message msg, String payload, long timeout, WsResponse response) {
+        fromNdid(msg.target, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                request(endpoint, msg, payload, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject();
+            }
+        });
     }
 
-    static boolean request(Message msg, long timeout, WsResponse response) {
-        WsEndpoint endpoint = fromNdid(msg.target);
-        if (endpoint != null) {
-            return request(endpoint, msg, timeout, response);
-        }
-        return false;
+    static void request(Message msg, long timeout, WsResponse response) {
+        fromNdid(msg.target, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                request(endpoint, msg, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject();
+            }
+        });
     }
 
-    static boolean request(WsEndpoint endpoint, String url, String target, String payload, long timeout, WsResponse response) {
-        return _request(endpoint, Message.requestReq(url, genMsgId(), target, payload), timeout, response);
+    static void request(WsEndpoint endpoint, String url, String target, String payload, long timeout, WsResponse response) {
+        _request(endpoint, Message.requestReq(url, genMsgId(), target, payload), timeout, response);
     }
 
-    static boolean request(WsEndpoint endpoint, Message msg, String payload, long timeout, WsResponse response) {
-        return _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, payload), timeout, response);
+    static void request(WsEndpoint endpoint, Message msg, String payload, long timeout, WsResponse response) {
+        _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, payload), timeout, response);
     }
 
-    static boolean request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
-        return _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, msg.payload), timeout, response);
+    static void request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
+        _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, msg.payload), timeout, response);
     }
 
-    static boolean _request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
+    static void _request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
         if (response == null) {
-            return endpoint.sendMsg(msg);
+            endpoint.sendMsg(msg);
         } else if (endpoint.sendMsg(msg)) {
             respHandlers.put(msg.msgId, new ResponseHandler(timeout, response));
-            return true;
+        } else {
+            response.reject();
         }
-        return false;
     }
 
 
@@ -119,22 +140,32 @@ public class WsMessageDispatcher {
         forward(message.message, timeout, response);
     }
 
-    static void forward(Message msg, String payload, long timeout, WsRouteResponse response) {
-        WsEndpoint endpoint = fromNdid(msg.target);
-        if (endpoint != null) {
-            forward(endpoint, msg, payload, timeout, response);
-        } else {
-            response.response(new ArrayList<>(), Response.error("Target Unreachable"));
-        }
+    static void forward(Message message, String payload, long timeout, WsRouteResponse response) {
+        fromNdid(message.target, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                forward(endpoint, message, payload, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject(ContainerUtils.makeArrayList(ServerProperties.getNdid()).get(), Reason.error("Target Unreachable"));
+            }
+        });
     }
 
     static void forward(Message message, long timeout, WsRouteResponse response) {
-        WsEndpoint endpoint = fromNdid(message.target);
-        if (endpoint != null) {
-            forward(endpoint, message, timeout, response);
-        } else {
-            response.response(new ArrayList<>(), Response.error("Target Unreachable"));
-        }
+        fromNdid(message.target, new FindEndpoint() {
+            @Override
+            public void resolve(WsEndpoint endpoint) {
+                forward(endpoint, message, timeout, response);
+            }
+
+            @Override
+            public void reject() {
+                response.reject(ContainerUtils.makeArrayList(ServerProperties.getNdid()).get(), Reason.error("Target Unreachable"));
+            }
+        });
     }
 
     static void forward(WsEndpoint endpoint, Message message, String payload, long timeout, WsRouteResponse response) {
@@ -151,7 +182,7 @@ public class WsMessageDispatcher {
         } else if (endpoint.sendMsg(message)) {
             routeRespHandlers.put(message.msgId, new RouteResponseHandler(timeout, response));
         } else {
-            response.response(new ArrayList<>(), Response.error("Send Failed"));
+            response.reject(new ArrayList<>(), Reason.error("Send Failed"));
         }
     }
 
@@ -186,16 +217,26 @@ public class WsMessageDispatcher {
                             handler.invoke();
                         }
                     } else if ((msg.message.target != null) && !msg.message.target.equals(ServerProperties.getNdid())) {
-                        request(msg, 10000, (resp) -> msg.response(resp.getPayload()));
-                    } else {
+                        request(msg, 10000, new WsResponse() {
+                            @Override
+                            public void resolve(WsMessage resp) {
+                                msg.response(resp.getPayload());
+                            }
 
+                            @Override
+                            public void reject() {
+                                System.out.println("request fail. target = " + msg.message.target + ", url = " + msg.message.url);
+                            }
+                        });
+                    } else {
+                        System.out.println("no request mapping method. url = " + msg.message.url);
                     }
                     break;
                 }
                 case RequestResp: {
                     ResponseHandler handler = respHandlers.remove(msg.message.msgId);
                     if (handler != null) {
-                        handler.invoke(msg);
+                        handler.resolve(msg);
                     }
                     break;
                 }
@@ -210,20 +251,35 @@ public class WsMessageDispatcher {
                             handler.invoke();
                         }
                     } else if ((msg.message.target != null) && !msg.message.target.equals(ServerProperties.getNdid())) {
-                        forward(msg, 10000, (routes, resp) -> {
-                            routes.add(ServerProperties.getNdid());
-                            endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, routes, resp));
+                        forward(msg, 10000, new WsRouteResponse() {
+                            @Override
+                            public void resolve(List<String> routes) {
+                                routes.add(ServerProperties.getNdid());
+                                endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, routes));
+                            }
+
+                            @Override
+                            public void reject(List<String> routes, Reason reason) {
+                                routes.add(ServerProperties.getNdid());
+                                endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, routes, reason));
+                            }
                         });
                     } else {
+                        System.out.println("no request mapping method. url = " + msg.message.url);
 
+                        endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, ContainerUtils.makeArrayList(ServerProperties.getNdid()).get()));
                     }
                     break;
                 }
                 case ForwardResp: {
                     RouteResponseHandler handler = routeRespHandlers.remove(msg.message.msgId);
                     if (handler != null) {
-                        Message.RouteResponse resp = msg.getPayload(Message.RouteResponse.class);
-                        handler.invoke(resp.routes, resp);
+                        Message.RoutePayload payload = msg.getPayload(Message.RoutePayload.class);
+                        if (payload.reason == null) {
+                            handler.resolve(payload.routes);
+                        } else {
+                            handler.reject(payload.routes, payload.reason);
+                        }
                     }
                     break;
                 }
@@ -236,6 +292,7 @@ public class WsMessageDispatcher {
                     Response resp = new Response();
                     if (endpoint.loginReqCheck(msg, resp)) {
                         endpoint.connected = true;
+                        endpoint.sendConnectResp(Response.ok("ok"));
                         endpoint.onConnected();
                     } else {
                         endpoint.close(resp);
@@ -261,22 +318,20 @@ public class WsMessageDispatcher {
     }
 
 
-    private static WsEndpoint fromNdid(String ndid) {
+    private static void fromNdid(String ndid, FindEndpoint finder) {
         WsEndpoint endpoint = WsDeviceServer.fromNdid(ndid);
         if (endpoint != null) {
-            return endpoint;
+            finder.resolve(endpoint);
         }
-
-        DeviceOnlineInfo deviceOnlineInfo = ObjectFactory.cacheAware.findDeviceOnlineInfo(ndid);
-        if (deviceOnlineInfo == null) {
-            return null;
+        else {
+            DeviceOnlineInfo deviceOnlineInfo = ObjectFactory.cacheAware.findDeviceOnlineInfo(ndid);
+            if (deviceOnlineInfo != null) {
+                WsCenterClient.connectToServer(deviceOnlineInfo.getServerNdid(), deviceOnlineInfo.getServerAddress(), finder);
+            }
+            else {
+                finder.reject();
+            }
         }
-
-        endpoint = WsCenterClient.connectToServer(deviceOnlineInfo.getServerNdid(), deviceOnlineInfo.getServerAddress());
-        if (endpoint != null) {
-            return endpoint;
-        }
-        return null;
     }
 
     private static Long sequence() {
@@ -309,21 +364,6 @@ public class WsMessageDispatcher {
 
         WsMessage.Batch batch;
         Integer index;
-
-
-        static Message connectReq(String payload) {
-            Message msg = new Message();
-            msg.type = Type.LoginReq;
-            msg.payload = payload;
-            return msg;
-        }
-
-        static Message connectResp(String payload) {
-            Message msg = new Message();
-            msg.type = Type.LoginResp;
-            msg.payload = payload;
-            return msg;
-        }
 
         static Message requestReq(String url, String msgId, String payload) {
             Message msg = new Message();
@@ -374,25 +414,21 @@ public class WsMessageDispatcher {
             return msg;
         }
 
-        static Message forwardResp(String url, String msgId, List<String> routes, Response response) {
+        static Message forwardResp(String url, String msgId, List<String> routes, Reason reason) {
             Message msg = new Message();
             msg.type = Type.ForwardResp;
             msg.url = url;
             msg.msgId = msgId;
-            RouteResponse resp = new RouteResponse(response.getSuccess(), response.getStatus(), response.getReason(), routes);
-            msg.payload = JsonUtils.toJSON(resp);
+            msg.payload = JsonUtils.toJSON(new RoutePayload(routes, reason));
             return msg;
         }
 
-        static Message forwardResp(String url, String msgId, Response response) {
+        static Message forwardResp(String url, String msgId, List<String> routes) {
             Message msg = new Message();
             msg.type = Type.ForwardResp;
             msg.url = url;
             msg.msgId = msgId;
-            List<String> routes = new ArrayList<>(1);
-            routes.set(0, ServerProperties.getNdid());
-            RouteResponse resp = new RouteResponse(response.getSuccess(), response.getStatus(), response.getReason(), routes);
-            msg.payload = JsonUtils.toJSON(resp);
+            msg.payload = JsonUtils.toJSON(new RoutePayload(routes, null));
             return msg;
         }
 
@@ -462,23 +498,30 @@ public class WsMessageDispatcher {
             ForwardResp,
         }
 
-        static class RouteResponse extends Response {
+        static class RoutePayload {
             List<String> routes;
+            Reason reason;
 
-            public RouteResponse() {
+            public RoutePayload() {
             }
 
-            public RouteResponse(Boolean success, Status status, String reason, List<String> routes) {
-                super(success, status, reason);
+            public RoutePayload(List<String> routes, Reason reason) {
                 this.routes = routes;
+                this.reason = reason;
             }
 
             public List<String> getRoutes() {
                 return routes;
             }
-
             public void setRoutes(List<String> routes) {
                 this.routes = routes;
+            }
+
+            public Reason getReason() {
+                return reason;
+            }
+            public void setReason(Reason reason) {
+                this.reason = reason;
             }
         }
     }
@@ -511,9 +554,16 @@ public class WsMessageDispatcher {
             this.response = response;
         }
 
-        void invoke(WsMessage message) {
+        void resolve(WsMessage message) {
             try {
-                this.response.response(message);
+                this.response.resolve(message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        void reject() {
+            try {
+                this.response.reject();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -529,12 +579,24 @@ public class WsMessageDispatcher {
             this.response = response;
         }
 
-        void invoke(List<String> routes, Response response) {
+        void resolve(List<String> routes) {
             try {
-                this.response.response(routes, response);
+                response.resolve(routes);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        void reject(List<String> routes, Reason reason) {
+            try {
+                response.reject(routes, reason);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    static interface FindEndpoint {
+        void resolve(WsEndpoint endpoint);
+        void reject();
     }
 }

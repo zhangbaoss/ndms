@@ -9,7 +9,10 @@ public class WsCenterEndpoint extends WsEndpoint {
         String connectTime;
         String secretKey;
 
-        ConnectReq(String ndid, String connectTime, String secretKey) {
+        public ConnectReq() {
+
+        }
+        public ConnectReq(String ndid, String connectTime, String secretKey) {
             this.ndid = ndid;
             this.connectTime = connectTime;
             this.secretKey = secretKey;

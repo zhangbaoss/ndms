@@ -1,61 +1,62 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
 import nurteen.prometheus.pc.framework.ServerProperties;
-import nurteen.prometheus.pc.framework.utils.MapUtils;
+import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.ContainerProvider;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ClientEndpoint
 public class WsCenterClient extends WsCenterEndpoint {
-    static Map<String, WsCenterClient> servers = new HashMap<>(); // ndid -> WsCenterClient
+    static Map<String, List<WsCenterClient>> servers = new HashMap<>(); // ndid -> httpsessionid -> WsCenterClient
 
     boolean connecting;
+    WsMessageDispatcher.FindEndpoint finder;
 
-    public WsCenterClient(String ndid) {
+    public WsCenterClient(String ndid, WsMessageDispatcher.FindEndpoint finder) {
         this.connecting = false;
+        this.finder = finder;
         this.ndid = ndid;
     }
 
-    public static WsEndpoint connectToServer(String serverNdid, String serverAddress) {
+    public static void connectToServer(String serverNdid, String serverAddress, WsMessageDispatcher.FindEndpoint finder) {
         try {
-            WsCenterClient server;
+            WsCenterClient server = null;
 
             synchronized (servers) {
-                server = servers.get(serverNdid);
-                if (server == null) {
-                    servers.put(serverNdid, server = new WsCenterClient(serverNdid));
+                List<WsCenterClient> connections = servers.get(serverNdid);
+                if (connections != null) {
+                    if (connections.size() > 1) {
+                        server = connections.remove(0);
+                        connections.add(server);
+                    }
+                    else {
+                        server = connections.get(0);
+                    }
                 }
             }
 
-            if (server.connected) {
-                return server;
+            if (server != null) {
+                finder.resolve(server);
+                return;
             }
 
-            synchronized (server) {
+            server = new WsCenterClient(serverNdid, finder);
 
-                if (server.connected) {
-                    return server;
-                }
+            String url = String.format("ws://%s/center?ndid=%s", serverAddress, ServerProperties.getNdid());
+            URI uri = URI.create(url);
+            ContainerProvider.getWebSocketContainer().connectToServer(server, uri);
 
-                String url = String.format("ws://%s/center?ndid=%s", serverAddress, ServerProperties.getNdid());
-                URI uri = URI.create(url);
-                ContainerProvider.getWebSocketContainer().connectToServer(server, uri);
-                server.wait(3000);
-            }
-
-            if (server.connected) {
-                return server;
-            }
-            return null;
+            ConnectReq connectReq = new ConnectReq(ServerProperties.getNdid(), "", "22222222222222222222222222222222");
+            server.sendConnectReq(connectReq);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override
@@ -64,13 +65,16 @@ public class WsCenterClient extends WsCenterEndpoint {
 
         System.out.println(String.format("Center Server WebSocket Connected. ndid = %s", ndid));
 
-        this.notifyAll();
+        if (this.finder != null) {
+            WsMessageDispatcher.FindEndpoint finder = this.finder;
+            this.finder = null;
 
-        /*
-        synchronized (servers) {
-            MapUtils.put(servers, this.ndid, this);
+            finder.resolve(this);
         }
-        */
+
+        synchronized (servers) {
+            ContainerUtils.addLinkedList(servers, this.ndid, this);
+        }
     }
 
     @Override
@@ -80,7 +84,7 @@ public class WsCenterClient extends WsCenterEndpoint {
         System.out.println(String.format("Center Server WebSocket Disconnected. ndid = %s", ndid));
 
         synchronized (servers) {
-            MapUtils.remove(servers, this.ndid);
+            ContainerUtils.deleteLinkedList(servers, this.ndid, this);
         }
     }
 }

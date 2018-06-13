@@ -4,7 +4,7 @@ import nurteen.prometheus.pc.framework.CacheAware;
 import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.entities.AccessTokenInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
-import nurteen.prometheus.pc.framework.utils.MapUtils;
+import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.RedisUtils;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
@@ -37,7 +37,7 @@ public class RedisCacheAware extends CacheAware {
             values = jedis.hmget(accessToken, "nuid", "ndid", "type");
             RedisUtils.releaseJedis(jedis);
 
-            if ((values != null) && (values.size() == 3)) {
+            if (ContainerUtils.notNull(values, 3)) {
                 return new AccessTokenInfo(values.get(0), values.get(1), Integer.valueOf(values.get(2)));
             }
             return null;
@@ -64,7 +64,7 @@ public class RedisCacheAware extends CacheAware {
     public void updateAccessToken(String accessToken, String nuid, String ndid, int type, int timeout) {
         try {
             Jedis jedis = RedisUtils.getJedis();
-            jedis.hmset(accessToken, MapUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type)).get());
+            jedis.hmset(accessToken, ContainerUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type)).get());
             jedis.expire(accessToken, timeout);
             RedisUtils.releaseJedis(jedis);
         }
@@ -77,7 +77,7 @@ public class RedisCacheAware extends CacheAware {
     public void addDevice(String ndid, String nuid, int type) {
         try {
             Jedis jedis = RedisUtils.getJedis();
-            jedis.hmset(ndid, MapUtils.make("nuid", nuid).put("type", Integer.toString(type)).put("serverNdid", ServerProperties.getNdid()).put("serverAddress", configProperties.getServerAddress()).get());
+            jedis.hmset(ndid, ContainerUtils.make("nuid", nuid).put("type", Integer.toString(type)).put("serverNdid", ServerProperties.getNdid()).put("serverAddress", configProperties.getServerAddress()).get());
             RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
@@ -104,7 +104,7 @@ public class RedisCacheAware extends CacheAware {
             List<String> values = jedis.hmget(ndid, "nuid", "type", "serverNdid", "serverAddress");
             RedisUtils.releaseJedis(jedis);
 
-            if ((values != null) && (values.size() == 4)) {
+            if (ContainerUtils.notNull(values, 4)) {
                 return new DeviceOnlineInfo(values.get(0), Integer.valueOf(values.get(1)), values.get(2), values.get(3));
             }
             return null;

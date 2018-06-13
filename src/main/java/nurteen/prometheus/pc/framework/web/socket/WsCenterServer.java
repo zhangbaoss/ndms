@@ -1,7 +1,7 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
 import nurteen.prometheus.pc.framework.Response;
-import nurteen.prometheus.pc.framework.utils.MapUtils;
+import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 
 import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class WsCenterServer extends WsCenterEndpoint {
         System.out.println(String.format("Center Client WebSocket Connected. ndid = %s", ndid));
 
         synchronized (clients) {
-            MapUtils.put(clients, this.ndid, this);
+            ContainerUtils.put(clients, this.ndid, this);
         }
     }
 
@@ -51,7 +51,7 @@ public class WsCenterServer extends WsCenterEndpoint {
         System.out.println(String.format("Center Client WebSocket Disconnected. ndid = %s", ndid));
 
         synchronized (clients) {
-            MapUtils.remove(clients, this.ndid);
+            ContainerUtils.remove(clients, this.ndid);
         }
     }
 }

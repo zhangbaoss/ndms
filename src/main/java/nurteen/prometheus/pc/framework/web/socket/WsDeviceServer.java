@@ -3,7 +3,7 @@ package nurteen.prometheus.pc.framework.web.socket;
 import nurteen.prometheus.pc.framework.ObjectFactory;
 import nurteen.prometheus.pc.framework.Response;
 import nurteen.prometheus.pc.framework.entities.AccessTokenInfo;
-import nurteen.prometheus.pc.framework.utils.MapUtils;
+import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 
 import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
@@ -82,8 +82,8 @@ public class WsDeviceServer extends WsEndpoint {
         ObjectFactory.cacheAware.addDevice(ndid, nuid, type);
 
         synchronized (devices) {
-            MapUtils.put(devices, ndid, this);
-            MapUtils.put(types, type, nuid, ndid, this);
+            ContainerUtils.put(devices, ndid, this);
+            ContainerUtils.put(types, type, nuid, ndid, this);
         }
     }
 
@@ -96,15 +96,15 @@ public class WsDeviceServer extends WsEndpoint {
         ObjectFactory.cacheAware.removeDevice(ndid);
 
         synchronized (devices) {
-            MapUtils.remove(devices, ndid);
-            MapUtils.remove(types, type, nuid, ndid);
+            ContainerUtils.remove(devices, ndid);
+            ContainerUtils.remove(types, type, nuid, ndid);
         }
     }
 
     /*
     public static void request(DeviceType type, String url, String payload, WsResponse response) {
         synchronized (devices) {
-            Map<String, Map<String, WsDeviceServer>> map1 = MapUtils.get(types, type.value);
+            Map<String, Map<String, WsDeviceServer>> map1 = ContainerUtils.get(types, type.value);
             if (map != null) {
                 for (Map.Entry<String, Map<String, WsDeviceServer>> entry1 : map1.entrySet()) {
                     for (Map.Entry<String, WsDeviceServer> entry2 : entry1.getValue().entrySet()) {

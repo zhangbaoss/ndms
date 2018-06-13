@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@CrossOrigin(origins = {"http://localhost:4200"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.1.7:4200", "*"}, allowCredentials = "true")
 public class AuthAppMobileController extends AuthBaseController {
 
     @RequestMapping(path = "/nalogin")

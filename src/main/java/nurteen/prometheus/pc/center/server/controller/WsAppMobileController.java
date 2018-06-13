@@ -31,8 +31,10 @@ public class WsAppMobileController {
                 */
         // return "test";
     }
+    /*
     @WsOnMessage(url = "/uuuuuuuuuuuuuuuu/hhhhhhhhhhhhhhhhhhh")
     public void uuuuuuuuuuuuuuuu(WsMessage msg) {
         System.out.println("uuuuuuuuuuuuuuuu");
     }
+    */
 }

@@ -7,85 +7,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7502bb4-6da7-4a3f-a610-1238228a1146" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Argument.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ObjectFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Promise.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ServerConfigProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ServerProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/StorageAware.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/LoginArgument.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/WXaLoginArgument.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppPcController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthPcControllerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceOnlineInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/ThirdpartyAccountType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/UserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/ExceptionResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/ExceptionUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/InvalidArgumentException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/listener/InitListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/listener/SessionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/IdGenUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/MapUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/Md5Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/RedisUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/TimeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resource/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resource/redis.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BasePromise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CrossOriginFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Reason.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/AccountDBAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BeanPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BeanPostProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/DefaultAccountDBAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/DefaultRedisAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/HttpArgs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/HttpReps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/RedisAware.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CacheAware.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Promise.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/LoginArgs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/LoginReps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/NaLoginArgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/NaLoginArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/NaLoginReps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/NaLoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/WXaLoginArgs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/WXaLoginReps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/WXaLoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/AccountInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/RedisAccountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/AccessTokenInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/PermissionDeniedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/PermissionDeniedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/controller/ExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/controller/ExceptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/WsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/WsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsAppMobileServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsAppPcServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMsg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMsgDispatcher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsPcControllerServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnClose.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnOpen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/sysconfig.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/MapUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/ContainerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resource/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -101,8 +43,51 @@
       <file leaf-file-name="WsMessageDispatcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="180" selection-start-line="180" selection-end-line="180" />
+            <state relative-caret-position="682">
+              <caret line="270" column="21" lean-forward="true" selection-start-line="270" selection-start-column="21" selection-end-line="270" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#request#2;class#WsMessageDispatcher#0" />
+                <element signature="method#request#3;class#WsMessageDispatcher#0" />
+                <element signature="e#3852#3853#0" expanded="true" />
+                <element signature="e#3901#3902#0" expanded="true" />
+                <element signature="e#8957#8958#0" expanded="true" />
+                <element signature="e#9052#9053#0" expanded="true" />
+                <element signature="method#sequence#0;class#WsMessageDispatcher#0" />
+                <element signature="e#17148#17149#0" expanded="true" />
+                <element signature="e#17194#17195#0" expanded="true" />
+                <element signature="e#17496#17497#0" expanded="true" />
+                <element signature="e#17538#17539#0" expanded="true" />
+                <element signature="class#Handler#0;class#WsMessageDispatcher#0" />
+                <element signature="method#ResponseHandler#0;class#ResponseHandler#0;class#WsMessageDispatcher#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hibernate.cfg.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthAppMobileController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="22" column="58" lean-forward="true" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RedisCacheAware.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="109" selection-start-line="109" selection-end-line="109" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,107 +95,69 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthBaseController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java">
+      <file leaf-file-name="CrossOriginFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CrossOriginFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="187">
+              <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#379#380#0" expanded="true" />
+                <element signature="e#415#416#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StorageAware.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/StorageAware.java">
+      <file leaf-file-name="WebFilter.class" pinned="false" current-in-tab="false">
+        <entry file="jar://D:/apache-tomcat-8.5.16/lib/servlet-api.jar!/javax/servlet/annotation/WebFilter.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
-              <folding>
-                <element signature="method#genNuid#0;class#StorageAware#0" />
-                <element signature="method#genNuid#1;class#StorageAware#0" />
-                <element signature="method#genAccount#0;class#StorageAware#0" />
-                <element signature="method#genAccount#1;class#StorageAware#0" />
-                <element signature="method#genNdid#0;class#StorageAware#0" />
-                <element signature="method#genNdid#1;class#StorageAware#0" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MysqlStorageAware.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java">
+      <file leaf-file-name="HttpServletRequest.class" pinned="false" current-in-tab="false">
+        <entry file="jar://D:/apache-tomcat-8.5.16/lib/servlet-api.jar!/javax/servlet/http/HttpServletRequest.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            <state relative-caret-position="212">
+              <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeviceInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="25" column="33" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/UserInfo.java">
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WsEndpoint.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java">
+      <file leaf-file-name="ContainerUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/ContainerUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+            <state relative-caret-position="256">
+              <caret line="162" column="34" selection-start-line="162" selection-start-column="34" selection-end-line="162" selection-end-column="34" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#598#599#0" expanded="true" />
-                <element signature="e#670#671#0" expanded="true" />
-                <element signature="method#close#0;class#WsEndpoint#0" />
+                <element signature="method#makeArrayList#1;class#ContainerUtils#0" />
+                <element signature="method#makeLinkedList#1;class#ContainerUtils#0" />
+                <element signature="method#addArrayList#0;class#ContainerUtils#0" />
+                <element signature="method#deleteArrayList#0;class#ContainerUtils#0" />
+                <element signature="method#addLinkedList#0;class#ContainerUtils#0" />
+                <element signature="method#deleteLinkedList#0;class#ContainerUtils#0" />
+                <element signature="class#MapMaker#0;class#ContainerUtils#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WsAppMobileController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java">
+      <file leaf-file-name="spring-mvc-servlet.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-mvc-servlet.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#247#248#0" expanded="true" />
-                <element signature="e#281#282#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WsDeviceServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="84" selection-start-line="84" selection-end-line="84" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="360">
+              <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -223,17 +170,14 @@
         <option value="Aspect" />
         <option value="@Aspect" />
         <option value="AnnotationType" />
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Message</find>
-      <find>WsStringMsg</find>
-      <find>WsMsg</find>
       <find>hibernate.hbm2ddl.auto</find>
       <find>\&quot;</find>
       <find>throws Exception</find>
@@ -252,7 +196,6 @@
       <find>getParameter</find>
       <find>genMsgId</find>
       <find>ForwardResponse</find>
-      <find>fromNdid</find>
       <find>genMsg</find>
       <find>getInvokeParameter</find>
       <find>WsResponse</find>
@@ -261,10 +204,15 @@
       <find>WsMsgBase</find>
       <find>t_devices</find>
       <find>t_user_devices</find>
+      <find>cors</find>
+      <find>fromNdid</find>
+      <find>Response</find>
+      <find>connectResp</find>
     </findStrings>
     <replaceStrings>
       <replace>Response</replace>
       <replace>response</replace>
+      <replace>Reason</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -273,20 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsPcCenterClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsPcCenterServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsAppMobileServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsAppPcServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsPcControllerServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CacheAware.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceOnlineInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/AccessTokenInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMsgDispatcher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/MapUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/entities/LoginArgs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Argument.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/LoginArgs.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/LoginReps.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/WXaLoginResponse.java" />
@@ -305,25 +239,39 @@
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Response.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/RouteResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDispatcher.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Manager.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ObjectFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsDeviceServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BeanPostProcessor.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/WXaLoginArgument.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/StorageAware.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java" />
         <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resource/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BasePromise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/MapUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Reason.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/CrossOriginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/BaseController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CrossOriginFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/ContainerUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java" />
+        <option value="$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java" />
       </list>
     </option>
   </component>
@@ -454,48 +402,6 @@
               <item name="pc" type="462c0819:PsiDirectoryNode" />
               <item name="framework" type="462c0819:PsiDirectoryNode" />
               <item name="authentication" type="462c0819:PsiDirectoryNode" />
-              <item name="argument" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="authentication" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pc" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -568,7 +474,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../research/prometheuspccenterserver" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.41379312" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -731,12 +637,12 @@
       <workItem from="1528296734324" duration="47453000" />
       <workItem from="1528417242397" duration="37605000" />
       <workItem from="1528590051073" duration="24310000" />
-      <workItem from="1528674628509" duration="41622000" />
+      <workItem from="1528674628509" duration="63186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244014000" />
+    <option name="totallyTimeSpent" value="265578000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2015" height="1308" extended-state="6" />
@@ -749,13 +655,14 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24961637" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" sideWeight="0.5005903" side_tool="true" weight="0.26536733" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.41040957" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.18600683" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.35153583" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.4411263" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" weight="0.32935154" />
@@ -765,10 +672,10 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32935154" />
       <window_info id="Persistence" order="3" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6628205" visible="true" weight="0.18209718" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6613475" visible="true" weight="0.20358056" />
       <window_info anchor="right" id="Bean Validation" order="4" />
-      <window_info id="Web" order="2" sideWeight="0.33717948" side_tool="true" weight="0.26700768" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.2943686" />
+      <window_info id="Web" order="2" sideWeight="0.3386525" side_tool="true" weight="0.16777493" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.22610922" />
       <window_info id="Learn" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -776,7 +683,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24961637" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -819,394 +725,34 @@
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java</url>
-          <line>29</line>
+          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java</url>
+          <line>63</line>
           <properties />
-          <option name="timeStamp" value="121" />
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java</url>
-          <line>89</line>
+          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java</url>
+          <line>81</line>
           <properties />
-          <option name="timeStamp" value="122" />
+          <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java</url>
-          <line>19</line>
+          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java</url>
+          <line>68</line>
           <properties />
-          <option name="timeStamp" value="123" />
+          <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java</url>
-          <line>32</line>
+          <url>file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java</url>
+          <line>106</line>
           <properties />
-          <option name="timeStamp" value="125" />
+          <option name="timeStamp" value="155" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="128" />
+      <option name="time" value="156" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/ExceptionResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/exception/ExceptionUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/AccessTokenInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceOnlineInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/ThirdpartyAccountType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/response/LoginResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/TimeUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/RedisUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/WsUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="method#toJSON#0;class#JsonUtils#0" />
-            <element signature="method#fromJSON#0;class#JsonUtils#0" />
-            <element signature="method#fromJSON#1;class#JsonUtils#0" />
-            <element signature="method#updateJSON#0;class#JsonUtils#0" />
-            <element signature="method#updateJSON#1;class#JsonUtils#0" />
-            <element signature="method#serializationObjectMapper#0;class#JsonUtils#0" />
-            <element signature="method#deserializationObjectMapper#0;class#JsonUtils#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/apache-tomcat-8.5.16/lib/tomcat-websocket.jar!/org/apache/tomcat/websocket/WsSession.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="80" column="381" lean-forward="true" selection-start-line="80" selection-start-column="371" selection-end-line="80" selection-end-column="385" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/apache-tomcat-8.5.16/lib/websocket-api.jar!/javax/websocket/EndpointConfig.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRoute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="method#WsRoute#0;class#WsRoute#0" />
-            <element signature="e#212#213#0" expanded="true" />
-            <element signature="e#241#242#0" expanded="true" />
-            <element signature="e#291#292#0" expanded="true" />
-            <element signature="e#327#328#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ServerConfigProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="6" selection-end-column="29" />
-          <folding>
-            <element signature="method#ServerConfigProperties#0;class#ServerConfigProperties#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/RouteResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="22" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ObjectFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Response.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="39" column="61" lean-forward="true" selection-start-line="39" selection-start-column="61" selection-end-line="39" selection-end-column="61" />
-          <folding>
-            <element signature="e#2624#2625#0" expanded="true" />
-            <element signature="e#2660#2661#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="383" column="7" lean-forward="true" selection-start-line="383" selection-start-column="7" selection-end-line="383" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/apache-tomcat-8.5.16/lib/websocket-api.jar!/javax/websocket/WebSocketContainer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="27" column="49" lean-forward="true" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnOpen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsOnClose.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/annotation/WsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/AppMobileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding>
-            <element signature="e#698#699#0" expanded="true" />
-            <element signature="e#762#763#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BeanPostProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/NaLoginArgument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.6.RELEASE/spring-web-5.0.6.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/WXaLoginArgument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#814#815#0" expanded="true" />
-            <element signature="e#844#845#0" expanded="true" />
-            <element signature="e#889#890#0" expanded="true" />
-            <element signature="e#927#928#0" expanded="true" />
-            <element signature="e#958#959#0" expanded="true" />
-            <element signature="e#985#986#0" expanded="true" />
-            <element signature="e#1024#1025#0" expanded="true" />
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1225#1226#0" expanded="true" />
-            <element signature="e#1261#1262#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
-            <element signature="e#1342#1343#0" expanded="true" />
-            <element signature="e#1384#1385#0" expanded="true" />
-            <element signature="e#1420#1421#0" expanded="true" />
-            <element signature="e#1452#1453#0" expanded="true" />
-            <element signature="e#1501#1502#0" expanded="true" />
-            <element signature="e#1543#1544#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/LoginArgument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
-          <folding>
-            <element signature="e#1027#1028#0" expanded="true" />
-            <element signature="e#1057#1058#0" expanded="true" />
-            <element signature="e#2801#2802#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/UserInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1235,7 +781,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/StorageAware.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
-          <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
           <folding>
             <element signature="method#genNuid#0;class#StorageAware#0" />
             <element signature="method#genNuid#1;class#StorageAware#0" />
@@ -1244,6 +790,60 @@
             <element signature="method#genNdid#0;class#StorageAware#0" />
             <element signature="method#genNdid#1;class#StorageAware#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Promise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="82" column="17" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resource/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/argument/LoginArgument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+          <folding>
+            <element signature="e#1027#1028#0" expanded="true" />
+            <element signature="e#1057#1058#0" expanded="true" />
+            <element signature="e#2801#2802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/AppMobileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.6.RELEASE/spring-webmvc-5.0.6.RELEASE.jar!/org/springframework/web/servlet/config/spring-mvc.xsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-836">
+          <caret line="1300" column="27" selection-start-line="1300" selection-start-column="23" selection-end-line="1300" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1257,49 +857,350 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="408">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/tomcat-websocket.jar!/org/apache/tomcat/websocket/WsSession.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="327" selection-start-line="327" selection-end-line="327" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/tomcat-websocket.jar!/org/apache/tomcat/websocket/WsFrameClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/MysqlStorageAware.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="561">
+          <caret line="294" column="29" selection-start-line="294" selection-start-column="29" selection-end-line="294" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java">
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/tomcat-websocket.jar!/org/apache/tomcat/websocket/WsFrameBase.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="258">
+          <caret line="329" selection-start-line="329" selection-end-line="329" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/tomcat-websocket.jar!/org/apache/tomcat/websocket/pojo/PojoMessageHandlerWholeBase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/BasePromise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Response.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="77" selection-end-column="5" />
+          <folding>
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#2660#2661#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/Reason.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="method#Reason#0;class#Reason#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#698#699#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="176" column="44" selection-start-line="176" selection-start-column="21" selection-end-line="176" selection-end-column="44" />
+          <folding>
+            <element signature="e#6283#6284#0" expanded="true" />
+            <element signature="e#6351#6352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsRouteResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/entities/DeviceOnlineInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="e#701#702#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
+            <element signature="e#905#906#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsCenterClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#WsCenterClient#0;class#WsCenterClient#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsEndpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+        <state relative-caret-position="246">
+          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#598#599#0" expanded="true" />
             <element signature="e#670#671#0" expanded="true" />
-            <element signature="method#close#0;class#WsEndpoint#0" />
+            <element signature="e#1015#1016#0" expanded="true" />
+            <element signature="e#1042#1043#0" expanded="true" />
+            <element signature="method#sendConnectReq#0;class#WsEndpoint#0" />
+            <element signature="method#sendConnectResp#0;class#WsEndpoint#0" />
+            <element signature="method#sendRequestReq#0;class#WsEndpoint#0" />
+            <element signature="method#sendConnectResp#1;class#WsEndpoint#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/controller/WsAppMobileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.6.RELEASE/spring-web-5.0.6.RELEASE.jar!/org/springframework/web/bind/annotation/CrossOrigin.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="41" column="24" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/CrossOriginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthBaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/server/WEB-INF/classes/nurteen/prometheus/pc/framework/authentication/AuthInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-37">
+          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/servlet-api.jar!/javax/servlet/FilterChain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/AuthInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="81" selection-start-line="12" selection-start-column="81" selection-end-line="12" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/ObjectFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/servlet-api.jar!/javax/servlet/http/HttpServletRequest.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/apache-tomcat-8.5.16/lib/servlet-api.jar!/javax/servlet/annotation/WebFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/CrossOriginFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-mvc-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/redis/clients/jedis/2.9.0/jedis-2.9.0.jar!/redis/clients/jedis/Jedis.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="303" column="24" selection-start-line="303" selection-start-column="24" selection-end-line="303" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/utils/ContainerUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="162" column="34" selection-start-line="162" selection-start-column="34" selection-end-line="162" selection-end-column="34" />
+          <folding>
+            <element signature="method#makeArrayList#1;class#ContainerUtils#0" />
+            <element signature="method#makeLinkedList#1;class#ContainerUtils#0" />
+            <element signature="method#addArrayList#0;class#ContainerUtils#0" />
+            <element signature="method#deleteArrayList#0;class#ContainerUtils#0" />
+            <element signature="method#addLinkedList#0;class#ContainerUtils#0" />
+            <element signature="method#deleteLinkedList#0;class#ContainerUtils#0" />
+            <element signature="class#MapMaker#0;class#ContainerUtils#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/authentication/controller/AuthAppMobileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="58" lean-forward="true" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/center/server/service/RedisCacheAware.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resource/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nurteen/prometheus/pc/framework/web/socket/WsMessageDispatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="180" selection-start-line="180" selection-end-line="180" />
+        <state relative-caret-position="682">
+          <caret line="270" column="21" lean-forward="true" selection-start-line="270" selection-start-column="21" selection-end-line="270" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#request#2;class#WsMessageDispatcher#0" />
+            <element signature="method#request#3;class#WsMessageDispatcher#0" />
+            <element signature="e#3852#3853#0" expanded="true" />
+            <element signature="e#3901#3902#0" expanded="true" />
+            <element signature="e#8957#8958#0" expanded="true" />
+            <element signature="e#9052#9053#0" expanded="true" />
+            <element signature="method#sequence#0;class#WsMessageDispatcher#0" />
+            <element signature="e#17148#17149#0" expanded="true" />
+            <element signature="e#17194#17195#0" expanded="true" />
+            <element signature="e#17496#17497#0" expanded="true" />
+            <element signature="e#17538#17539#0" expanded="true" />
+            <element signature="class#Handler#0;class#WsMessageDispatcher#0" />
+            <element signature="method#ResponseHandler#0;class#ResponseHandler#0;class#WsMessageDispatcher#0" />
           </folding>
         </state>
       </provider>
@@ -1315,7 +1216,6 @@
             <option name="proportions">
               <list>
                 <option value="0.41379312" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1323,11 +1223,11 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring</last-edited>
+          <last-edited>Detection</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.41379312" />
               </list>
             </option>
           </splitter-proportions>
@@ -1338,7 +1238,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.41379312" />
               </list>
             </option>
           </splitter-proportions>
@@ -1346,11 +1246,11 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.41379312" />
               </list>
             </option>
           </splitter-proportions>
@@ -1358,12 +1258,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>server</last-edited>
+          <last-edited>Web|server</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.41379312" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1383,7 +1282,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.5</last-edited>
+          <last-edited>Maven: org.springframework:spring-context:5.0.6.RELEASE</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

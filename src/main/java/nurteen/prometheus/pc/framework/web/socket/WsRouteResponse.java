@@ -1,9 +1,10 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
-import nurteen.prometheus.pc.framework.Response;
+import nurteen.prometheus.pc.framework.Reason;
 
 import java.util.List;
 
 public interface WsRouteResponse {
-    void response(List<String> routes, Response response);
+    void resolve(List<String> routes);
+    void reject(List<String> routes, Reason reason);
 }

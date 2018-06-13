@@ -5,8 +5,8 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
     </session-factory>
 </hibernate-configuration>

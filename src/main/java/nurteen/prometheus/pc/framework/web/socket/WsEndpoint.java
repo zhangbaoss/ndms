@@ -41,12 +41,40 @@ public class WsEndpoint {
     }
 
     protected void onConnected() {
-        this.sendMsg(WsMessageDispatcher.Message.connectResp(JsonUtils.toJSON(Response.ok("ok"))));
     }
     protected void onDisconnected() {
     }
 
 
+    public boolean sendConnectReq(Object connectReq) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.LoginReq;
+        message.payload = JsonUtils.toJSON(connectReq);
+        return sendMsg(message);
+    }
+    public boolean sendConnectResp(Object connectResp) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.LoginResp;
+        message.payload = JsonUtils.toJSON(connectResp);
+        return sendMsg(message);
+    }
+    public boolean sendRequestReq(String url, String msgId, Object requestReq) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.RequestReq;
+        message.url = url;
+        message.msgId = msgId;
+        message.payload = JsonUtils.toJSON(requestReq);
+        return sendMsg(message);
+    }
+    public boolean sendRequestReq(String url, String msgId, String target, Object requestReq) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.RequestReq;
+        message.url = url;
+        message.msgId = msgId;
+        message.target = target;
+        message.payload = JsonUtils.toJSON(requestReq);
+        return sendMsg(message);
+    }
     public boolean sendMsg(WsMessageDispatcher.Message message) {
         try {
             this.sendObject(message);
@@ -68,7 +96,7 @@ public class WsEndpoint {
     }
 
     public void close(Response response) {
-        this.sendMsg(WsMessageDispatcher.Message.connectResp(JsonUtils.toJSON(response)));
+        this.sendConnectResp(response);
         this.close();
     }
     public void close() {
