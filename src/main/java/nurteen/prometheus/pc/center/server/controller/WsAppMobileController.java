@@ -8,9 +8,9 @@ import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
 public class WsAppMobileController {
 
     @WsOnMessage(url = "/test/gggggg")
-    public String testgggggg(WsMessage msg) {
+    public void testgggggg(WsMessage msg) {
         System.out.println("onMessage: " + msg.getPayload());
-        return "test";
+        msg.response("dddddddd");
     }
     @WsOnMessage(url = "/test/gggggg/g")
     public void testggggggg(WsMessage msg) {
@@ -31,10 +31,22 @@ public class WsAppMobileController {
                 */
         // return "test";
     }
-    /*
+
     @WsOnMessage(url = "/uuuuuuuuuuuuuuuu/hhhhhhhhhhhhhhhhhhh")
     public void uuuuuuuuuuuuuuuu(WsMessage msg) {
-        System.out.println("uuuuuuuuuuuuuuuu");
+        System.out.println("server capture message: " + msg.getPayload());
+
+        WsMessageDispatcher.request(msg, "server processed", 10000, new WsResponse() {
+            @Override
+            public void resolve(WsMessage message) {
+                System.out.println("server get response message: " + msg.getPayload());
+                msg.response(message.getPayload());
+            }
+
+            @Override
+            public void reject() {
+                System.out.println("server request failed");
+            }
+        });
     }
-    */
 }
