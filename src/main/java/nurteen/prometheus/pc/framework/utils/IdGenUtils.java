@@ -1,26 +1,21 @@
 package nurteen.prometheus.pc.framework.utils;
 
+import nurteen.prometheus.pc.framework.ObjectFactory;
+import nurteen.prometheus.pc.framework.entities.DeviceType;
+
 public class IdGenUtils {
-    static String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    // nuid为9位
-    // 2位配置（不同服务器不一样）+取本地时间毫秒值（转换位62进制后位7位）
-    public static String genNuid() {
-        return "AB" + to62(System.currentTimeMillis());
+    // nuid
+    public static final String genNuid() throws Exception {
+        return ObjectFactory.storageAware.genNuid();
     }
 
-    // ndid为12位
-    // 2位配置（不同服务器不一样）+1位（设备类型）+取本地时间微秒值（转换位62进制后位9位）
-    public static String genNdid() {
-        return "";
+    // account
+    public static final String genAccount() throws Exception {
+        return ObjectFactory.storageAware.genAccount();
     }
 
-    private static String to62(long value) {
-        StringBuilder s = new StringBuilder();
-        while (value > 0) {
-            s.append(chars.charAt((int)(value % 62)));
-            value /= 62;
-        }
-        return s.toString();
+    // ndid
+    public static final String genNdid(DeviceType type) throws Exception {
+        return ObjectFactory.storageAware.genNdid(type.getValue());
     }
 }

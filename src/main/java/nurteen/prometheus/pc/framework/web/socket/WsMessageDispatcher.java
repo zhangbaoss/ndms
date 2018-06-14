@@ -45,142 +45,94 @@ public class WsMessageDispatcher {
     }
     */
 
-    public static void request(HttpServletRequest request, String ndid, String url, String payload, long timeout, WsResponse response) {
-        fromNdid(ndid, new FindEndpoint() {
+    public static void request(HttpServletRequest request, String url, String target, String payload, long timeout, WsResponse response) {
+        request(url, target, payload, timeout, response);
+    }
+
+    public static void request(WsMessage message, long timeout, WsResponse response) {
+        _request(message.getUrl(), message.getMsgId(), message.getTarget(), message.getPayload(), timeout, response);
+    }
+
+    public static void request(WsMessage message, String payload, long timeout, WsResponse response) {
+        _request(message.getUrl(), message.getMsgId(), message.getTarget(), payload, timeout, response);
+    }
+
+    public static void request(WsMessage message, String target, String payload, long timeout, WsResponse response) {
+        _request(message.getUrl(), message.getMsgId(), target, payload, timeout, response);
+    }
+
+    public static void request(WsMessage message, String url, String target, String payload, long timeout, WsResponse response) {
+        _request(url, message.getMsgId(), target, payload, timeout, response);
+    }
+
+    public static void request(String url, String target, String payload, long timeout, WsResponse response) {
+        _request(url, genMsgId(), target, payload, timeout, response);
+    }
+
+    static void _request(String url, String msgId, String target, String payload, long timeout, WsResponse response) {
+        fromNdid(target, new FindEndpoint() {
             @Override
             public void resolve(WsEndpoint endpoint) {
-                request(endpoint, url, ndid, payload, timeout, response);
+                _request(endpoint, url, msgId, target, payload, timeout, response);
             }
 
             @Override
-            public void reject() {
-                response.reject();
+            public void reject(Reason reason) {
+                response.reject(reason);
             }
         });
     }
 
-    public static void request(String ndid, String url, String payload, long timeout, WsResponse response) {
-        fromNdid(ndid, new FindEndpoint() {
-            @Override
-            public void resolve(WsEndpoint endpoint) {
-                request(endpoint, url, ndid, payload, timeout, response);
-            }
-
-            @Override
-            public void reject() {
-                response.reject();
-            }
-        });
-    }
-
-    public static void request(WsMessage msg, String payload, long timeout, WsResponse response) {
-        request(msg.message, payload, timeout, response);
-    }
-
-    public static void request(WsMessage msg, long timeout, WsResponse response) {
-        request(msg.message, timeout, response);
-    }
-
-    static void request(Message msg, String payload, long timeout, WsResponse response) {
-        fromNdid(msg.target, new FindEndpoint() {
-            @Override
-            public void resolve(WsEndpoint endpoint) {
-                request(endpoint, msg, payload, timeout, response);
-            }
-
-            @Override
-            public void reject() {
-                response.reject();
-            }
-        });
-    }
-
-    static void request(Message msg, long timeout, WsResponse response) {
-        fromNdid(msg.target, new FindEndpoint() {
-            @Override
-            public void resolve(WsEndpoint endpoint) {
-                request(endpoint, msg, timeout, response);
-            }
-
-            @Override
-            public void reject() {
-                response.reject();
-            }
-        });
-    }
-
-    static void request(WsEndpoint endpoint, String url, String target, String payload, long timeout, WsResponse response) {
-        _request(endpoint, Message.requestReq(url, genMsgId(), target, payload), timeout, response);
-    }
-
-    static void request(WsEndpoint endpoint, Message msg, String payload, long timeout, WsResponse response) {
-        _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, payload), timeout, response);
-    }
-
-    static void request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
-        _request(endpoint, Message.requestReq(msg.url, msg.msgId, msg.target, msg.payload), timeout, response);
-    }
-
-    static void _request(WsEndpoint endpoint, Message msg, long timeout, WsResponse response) {
+    static void _request(WsEndpoint endpoint, String url, String msgId, String target, String payload, long timeout, WsResponse response) {
         if (response == null) {
-            endpoint.sendMsg(msg);
-        } else if (endpoint.sendMsg(msg)) {
-            respHandlers.put(msg.msgId, new ResponseHandler(timeout, response));
+            endpoint.sendRequestReq(url, msgId, target, payload);
+        } else if (endpoint.sendRequestReq(url, msgId, target, payload)) {
+            respHandlers.put(msgId, new ResponseHandler(timeout, response));
         } else {
-            response.reject();
+            response.reject(Reason.error("Send Failed"));
         }
     }
 
 
-    public static void forward(WsMessage message, String payload, long timeout, WsRouteResponse response) {
-        forward(message.message, payload, timeout, response);
-    }
-
     public static void forward(WsMessage message, long timeout, WsRouteResponse response) {
-        forward(message.message, timeout, response);
+        _forward(message.getUrl(), message.getMsgId(), message.getTarget(), message.getPayload(), timeout, response);
     }
 
-    static void forward(Message message, String payload, long timeout, WsRouteResponse response) {
-        fromNdid(message.target, new FindEndpoint() {
+    public static void forward(WsMessage message, String payload, long timeout, WsRouteResponse response) {
+        _forward(message.getUrl(), message.getMsgId(), message.getTarget(), payload, timeout, response);
+    }
+
+    public static void forward(WsMessage message, String url, String payload, long timeout, WsRouteResponse response) {
+        _forward(url, message.getMsgId(), message.getTarget(), payload, timeout, response);
+    }
+
+    public static void forward(WsMessage message, String url, String target, String payload, long timeout, WsRouteResponse response) {
+        _forward(url, message.getMsgId(), target, payload, timeout, response);
+    }
+
+    public static void forward(String url, String target, String payload, long timeout, WsRouteResponse response) {
+        _forward(url, genMsgId(), target, payload, timeout, response);
+    }
+
+    static void _forward(String url, String msgId, String target, String payload, long timeout, WsRouteResponse response) {
+        fromNdid(target, new FindEndpoint() {
             @Override
             public void resolve(WsEndpoint endpoint) {
-                forward(endpoint, message, payload, timeout, response);
+                _forward(endpoint, url, msgId, target, payload, timeout, response);
             }
 
             @Override
-            public void reject() {
-                response.reject(ContainerUtils.makeArrayList(ServerProperties.getNdid()).get(), Reason.error("Target Unreachable"));
+            public void reject(Reason reason) {
+                response.reject(ContainerUtils.makeArrayList(ServerProperties.getNdid()).get(), reason);
             }
         });
     }
 
-    static void forward(Message message, long timeout, WsRouteResponse response) {
-        fromNdid(message.target, new FindEndpoint() {
-            @Override
-            public void resolve(WsEndpoint endpoint) {
-                forward(endpoint, message, timeout, response);
-            }
-
-            @Override
-            public void reject() {
-                response.reject(ContainerUtils.makeArrayList(ServerProperties.getNdid()).get(), Reason.error("Target Unreachable"));
-            }
-        });
-    }
-
-    static void forward(WsEndpoint endpoint, Message message, String payload, long timeout, WsRouteResponse response) {
-        _forward(endpoint, Message.forwardReq(message.url, message.msgId, message.target, payload), timeout, response);
-    }
-
-    static void forward(WsEndpoint endpoint, Message message, long timeout, WsRouteResponse response) {
-        _forward(endpoint, Message.forwardReq(message.url, message.msgId, message.target, message.payload), timeout, response);
-    }
-
-    static void _forward(WsEndpoint endpoint, Message message, long timeout, WsRouteResponse response) {
+    static void _forward(WsEndpoint endpoint, String url, String msgId, String target, String payload, long timeout, WsRouteResponse response) {
         if (response == null) {
-            endpoint.sendMsg(message);
-        } else if (endpoint.sendMsg(message)) {
-            routeRespHandlers.put(message.msgId, new RouteResponseHandler(timeout, response));
+            endpoint.sendForwardReq(url, msgId, target, payload);
+        } else if (endpoint.sendForwardReq(url, msgId, target, payload)) {
+            routeRespHandlers.put(msgId, new RouteResponseHandler(timeout, response));
         } else {
             response.reject(new ArrayList<>(), Reason.error("Send Failed"));
         }
@@ -202,21 +154,20 @@ public class WsMessageDispatcher {
     */
     void onMessage(WsEndpoint endpoint, String message) {
         WsMessage msg = new WsMessage(endpoint, JsonUtils.fromJSON(message, Message.class));
-        if (msg.message.type == null) {
-            System.out.println("error message: " + message);
-            endpoint.close(Response.error("error message"));
+        if (msg.getType() == null) {
+            endpoint.close(Response.error("数据格式错误，请检查！"));
         } else if (endpoint.connected) {
             // System.out.println(String.format("message, from = %s, source = %s, target = %s, msgId = %s, url = %s, type = %s.", endpoint.ndid, msg.source, msg.target, msg.msgId, msg.url, msg.type.toString()));
-            switch (msg.message.type) {
+            switch (msg.getType()) {
                 case RequestReq: {
-                    Handler handler = reqHandlers.get(msg.message.url);
+                    Handler handler = reqHandlers.get(msg.getUrl());
                     if (handler != null) {
                         if (handler.method.getParameterTypes().length == 1) {
                             handler.invoke(msg);
                         } else {
                             handler.invoke();
                         }
-                    } else if ((msg.message.target != null) && !msg.message.target.equals(ServerProperties.getNdid())) {
+                    } else if (!msg.forMe()) {
                         request(msg, 10000, new WsResponse() {
                             @Override
                             public void resolve(WsMessage resp) {
@@ -224,7 +175,7 @@ public class WsMessageDispatcher {
                             }
 
                             @Override
-                            public void reject() {
+                            public void reject(Reason reason) {
                                 System.out.println("request fail. target = " + msg.message.target + ", url = " + msg.message.url);
                             }
                         });
@@ -234,7 +185,7 @@ public class WsMessageDispatcher {
                     break;
                 }
                 case RequestResp: {
-                    ResponseHandler handler = respHandlers.remove(msg.message.msgId);
+                    ResponseHandler handler = respHandlers.remove(msg.getMsgId());
                     if (handler != null) {
                         handler.resolve(msg);
                     }
@@ -243,36 +194,33 @@ public class WsMessageDispatcher {
                 case RequestBatchResp:
                     break;
                 case ForwardReq: {
-                    Handler handler = reqHandlers.get(msg.message.url);
+                    Handler handler = reqHandlers.get(msg.getUrl());
                     if (handler != null) {
                         if (handler.method.getParameterTypes().length == 1) {
                             handler.invoke(msg);
                         } else {
                             handler.invoke();
                         }
-                    } else if ((msg.message.target != null) && !msg.message.target.equals(ServerProperties.getNdid())) {
+                    } else if (!msg.forMe()) {
                         forward(msg, 10000, new WsRouteResponse() {
                             @Override
                             public void resolve(List<String> routes) {
-                                routes.add(ServerProperties.getNdid());
-                                endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, routes));
+                                endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(routes, ServerProperties.getNdid()));
                             }
 
                             @Override
                             public void reject(List<String> routes, Reason reason) {
-                                routes.add(ServerProperties.getNdid());
-                                endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, routes, reason));
+                                endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(routes, ServerProperties.getNdid()), reason);
                             }
                         });
                     } else {
                         System.out.println("no request mapping method. url = " + msg.message.url);
-
-                        endpoint.sendMsg(Message.forwardResp(msg.message.url, msg.message.msgId, ContainerUtils.makeArrayList(ServerProperties.getNdid()).get()));
+                        endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.makeArrayList(ServerProperties.getNdid()).get());
                     }
                     break;
                 }
                 case ForwardResp: {
-                    RouteResponseHandler handler = routeRespHandlers.remove(msg.message.msgId);
+                    RouteResponseHandler handler = routeRespHandlers.remove(msg.getMsgId());
                     if (handler != null) {
                         Message.RoutePayload payload = msg.getPayload(Message.RoutePayload.class);
                         if (payload.reason == null) {
@@ -310,7 +258,7 @@ public class WsMessageDispatcher {
                     break;
                 }
                 default: {
-                    endpoint.close(Response.permissionDenied("please login first."));
+                    endpoint.close(Response.permissionDenied());
                     break;
                 }
             }
@@ -329,7 +277,7 @@ public class WsMessageDispatcher {
                 WsCenterClient.connectToServer(deviceOnlineInfo.getServerNdid(), deviceOnlineInfo.getServerAddress(), finder);
             }
             else {
-                finder.reject();
+                finder.reject(Reason.error(String.format("目标[%s]不可达！", ndid)));
             }
         }
     }
@@ -365,34 +313,6 @@ public class WsMessageDispatcher {
         WsMessage.Batch batch;
         Integer index;
 
-        static Message requestReq(String url, String msgId, String payload) {
-            Message msg = new Message();
-            msg.type = Type.RequestReq;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.payload = payload;
-            return msg;
-        }
-
-        static Message requestReq(String url, String msgId, String target, String payload) {
-            Message msg = new Message();
-            msg.type = Type.RequestReq;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.target = target;
-            msg.payload = payload;
-            return msg;
-        }
-
-        static Message requestResp(String url, String msgId, String payload) {
-            Message msg = new Message();
-            msg.type = Type.RequestResp;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.payload = payload;
-            return msg;
-        }
-
         static Message requestBatchResp(WsMessage.Batch batch, Integer index, String url, String msgId, String payload) {
             Message msg = new Message();
             msg.type = Type.RequestBatchResp;
@@ -401,34 +321,6 @@ public class WsMessageDispatcher {
             msg.url = url;
             msg.msgId = msgId;
             msg.payload = payload;
-            return msg;
-        }
-
-        static Message forwardReq(String url, String msgId, String target, String payload) {
-            Message msg = new Message();
-            msg.type = Type.ForwardReq;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.target = target;
-            msg.payload = payload;
-            return msg;
-        }
-
-        static Message forwardResp(String url, String msgId, List<String> routes, Reason reason) {
-            Message msg = new Message();
-            msg.type = Type.ForwardResp;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.payload = JsonUtils.toJSON(new RoutePayload(routes, reason));
-            return msg;
-        }
-
-        static Message forwardResp(String url, String msgId, List<String> routes) {
-            Message msg = new Message();
-            msg.type = Type.ForwardResp;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.payload = JsonUtils.toJSON(new RoutePayload(routes, null));
             return msg;
         }
 
@@ -561,9 +453,9 @@ public class WsMessageDispatcher {
                 e.printStackTrace();
             }
         }
-        void reject() {
+        void reject(Reason reason) {
             try {
-                this.response.reject();
+                this.response.reject(reason);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -597,6 +489,6 @@ public class WsMessageDispatcher {
 
     static interface FindEndpoint {
         void resolve(WsEndpoint endpoint);
-        void reject();
+        void reject(Reason reason);
     }
 }

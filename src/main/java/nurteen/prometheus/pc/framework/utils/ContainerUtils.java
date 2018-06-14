@@ -121,8 +121,9 @@ public class ContainerUtils {
     }
 
 
-    public static <Value> void add(List<Value> list, Value value) {
+    public static <Value> List<Value> add(List<Value> list, Value value) {
         list.add(value);
+        return list;
     }
 
     public static <Key1, Value> void addArrayList(Map<Key1, List<Value>> map, Key1 key1, Value value) {

@@ -1,5 +1,6 @@
 package nurteen.prometheus.pc.center.server.controller;
 
+import nurteen.prometheus.pc.framework.Reason;
 import nurteen.prometheus.pc.framework.web.socket.*;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsController;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
@@ -44,7 +45,7 @@ public class WsAppMobileController {
             }
 
             @Override
-            public void reject() {
+            public void reject(Reason reason) {
                 System.out.println("server request failed");
             }
         });

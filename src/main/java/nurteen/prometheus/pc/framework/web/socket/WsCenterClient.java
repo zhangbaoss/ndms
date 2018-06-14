@@ -1,5 +1,6 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
+import nurteen.prometheus.pc.framework.Reason;
 import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 
@@ -33,8 +34,7 @@ public class WsCenterClient extends WsCenterEndpoint {
                     if (connections.size() > 1) {
                         server = connections.remove(0);
                         connections.add(server);
-                    }
-                    else {
+                    } else {
                         server = connections.get(0);
                     }
                 }
@@ -51,10 +51,12 @@ public class WsCenterClient extends WsCenterEndpoint {
             URI uri = URI.create(url);
             ContainerProvider.getWebSocketContainer().connectToServer(server, uri);
 
-            ConnectReq connectReq = new ConnectReq(ServerProperties.getNdid(), "", "22222222222222222222222222222222");
-            server.sendConnectReq(connectReq);
-        }
-        catch (Exception e) {
+            if (!server.sendConnectReq()) {
+                server.close();
+                finder.reject(Reason.error("发送登录请求失败"));
+            }
+        } catch (Exception e) {
+            finder.reject(Reason.exceptionOccurred(e.toString()));
             e.printStackTrace();
         }
     }

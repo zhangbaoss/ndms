@@ -37,6 +37,9 @@ public class Response {
     public static Response invalidArgument(String message, Object data) {
         return new DataResponse(false, Status.InvalidArgument, message, data);
     }
+    public static Response permissionDenied() {
+        return new Response(false, Status.PermissionDenied, "未授权，请先进行登录认证，然后再重试！");
+    }
     public static Response permissionDenied(String message) {
         return new Response(false, Status.PermissionDenied, message);
     }
