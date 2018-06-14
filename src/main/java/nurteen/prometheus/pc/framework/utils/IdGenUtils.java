@@ -18,4 +18,9 @@ public class IdGenUtils {
     public static final String genNdid(DeviceType type) throws Exception {
         return ObjectFactory.storageAware.genNdid(type);
     }
+
+    // hid
+    public static String genHid() {
+        return "";
+    }
 }

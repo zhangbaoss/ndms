@@ -4,6 +4,7 @@ import nurteen.prometheus.pc.framework.*;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
 import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.JsonUtils;
+import org.omg.CORBA.portable.ResponseHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -194,6 +195,10 @@ public class WsMessageDispatcher {
                 case RequestBatchResp:
                     break;
                 case ForwardReq: {
+                    if (msg.forMe()) {
+                        endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.makeArrayList(ServerProperties.getNdid()).get());
+                    }
+
                     Handler handler = reqHandlers.get(msg.getUrl());
                     if (handler != null) {
                         if (handler.method.getParameterTypes().length == 1) {
@@ -215,7 +220,6 @@ public class WsMessageDispatcher {
                         });
                     } else {
                         System.out.println("no request mapping method. url = " + msg.message.url);
-                        endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.makeArrayList(ServerProperties.getNdid()).get());
                     }
                     break;
                 }
@@ -266,19 +270,29 @@ public class WsMessageDispatcher {
     }
 
 
-    private static void fromNdid(String ndid, FindEndpoint finder) {
-        WsEndpoint endpoint = WsDeviceServer.fromNdid(ndid);
+    private static void fromNdid(String target, FindEndpoint finder) {
+        if (target == null) {
+            finder.reject(Reason.error("目标不能为空"));
+            return;
+        }
+
+        WsEndpoint endpoint = WsDeviceServer.fromNdid(target);
         if (endpoint != null) {
             finder.resolve(endpoint);
+            return;
         }
-        else {
-            DeviceOnlineInfo deviceOnlineInfo = ObjectFactory.cacheAware.findDeviceOnlineInfo(ndid);
-            if (deviceOnlineInfo != null) {
-                WsCenterClient.connectToServer(deviceOnlineInfo.getServerNdid(), deviceOnlineInfo.getServerAddress(), finder);
-            }
-            else {
-                finder.reject(Reason.error(String.format("目标[%s]不可达！", ndid)));
-            }
+
+        endpoint = WsCenterServer.fromNdid(target);
+        if (endpoint != null) {
+            finder.resolve(endpoint);
+            return;
+        }
+
+        DeviceOnlineInfo deviceOnlineInfo = ObjectFactory.cacheAware.findDeviceOnlineInfo(target);
+        if (deviceOnlineInfo != null) {
+            WsCenterClient.connectToServer(deviceOnlineInfo.getServerNdid(), deviceOnlineInfo.getServerAddress(), finder);
+        } else {
+            finder.reject(Reason.error(String.format("目标[%s]不可达！", target)));
         }
     }
 

@@ -11,7 +11,7 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println(beanName);
+        System.out.println("对象：" + beanName);
         return bean;
     }
 

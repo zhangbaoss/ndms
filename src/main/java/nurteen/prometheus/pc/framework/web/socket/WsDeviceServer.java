@@ -101,25 +101,6 @@ public class WsDeviceServer extends WsEndpoint {
         }
     }
 
-    /*
-    public static void request(DeviceType type, String url, String payload, WsResponse response) {
-        synchronized (devices) {
-            Map<String, Map<String, WsDeviceServer>> map1 = ContainerUtils.get(types, type.value);
-            if (map != null) {
-                for (Map.Entry<String, Map<String, WsDeviceServer>> entry1 : map1.entrySet()) {
-                    for (Map.Entry<String, WsDeviceServer> entry2 : entry1.getValue().entrySet()) {
-                        WsMessageDispatcher.request(entry2.getValue(), url, entry2.getKey(), payload, response);
-                    }
-                }
-            }
-        }
-    }
-    public static void request(String ndid, String url, String message, WsResponse response) {
-        WsMessageDispatcher.request(ndid, url, message, response);
-    }
-    */
-
-
     static class ConnectReq {
         String nuid;
         String ndid;

@@ -1,0 +1,1 @@
+gcc -shared -o time-utils.dll nurteen_prometheus_pc_framework_utils_TimeUtils.c -I"C:\Program Files\Java\jdk1.8.0_161\include\win32" -I"C:\Program Files\Java\jdk1.8.0_161\include"

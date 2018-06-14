@@ -11,6 +11,12 @@ import java.util.Map;
 public class WsCenterServer extends WsCenterEndpoint {
     static Map<String, WsCenterServer> clients = new HashMap<>(); // ndid -> WsCenterServer
 
+    static WsCenterServer fromNdid(String ndid) {
+        synchronized (clients) {
+            return clients.get(ndid);
+        }
+    }
+
     @Override
     protected boolean loginReqCheck(WsMessage message, Response response) {
         if (!super.loginReqCheck(message, response)) {

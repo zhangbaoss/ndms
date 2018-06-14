@@ -12,6 +12,7 @@ public class WXaLoginArgument extends Argument {
 
     String product;
     String code;
+
     @NotNull(message = "设备信息不能为空")
     LoginArgument.Device device;
 

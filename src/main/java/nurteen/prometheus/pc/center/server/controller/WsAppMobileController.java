@@ -1,6 +1,7 @@
 package nurteen.prometheus.pc.center.server.controller;
 
 import nurteen.prometheus.pc.framework.Reason;
+import nurteen.prometheus.pc.framework.utils.TimeUtils;
 import nurteen.prometheus.pc.framework.web.socket.*;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsController;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
@@ -36,6 +37,9 @@ public class WsAppMobileController {
     @WsOnMessage(url = "/uuuuuuuuuuuuuuuu/hhhhhhhhhhhhhhhhhhh")
     public void uuuuuuuuuuuuuuuu(WsMessage msg) {
         System.out.println("server capture message: " + msg.getPayload());
+
+        long t = TimeUtils.currentTimeNsecs();
+        long tt = System.currentTimeMillis() * 1000000L;
 
         WsMessageDispatcher.request(msg, "server processed", 10000, new WsResponse() {
             @Override

@@ -4,6 +4,7 @@ import nurteen.prometheus.pc.framework.entities.DeviceType;
 import nurteen.prometheus.pc.framework.entities.ThirdpartyAccountType;
 import nurteen.prometheus.pc.framework.entities.DeviceInfo;
 import nurteen.prometheus.pc.framework.entities.UserInfo;
+import nurteen.prometheus.pc.framework.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Instant;
@@ -21,9 +22,12 @@ public abstract class StorageAware {
         return this.genNuid(this.configProperties.getIdGenPrefix());
     }
     public String genNuid(String prefix) throws Exception {
+        /*
         Instant instant = this.getInstant();
         long msecs = instant.getEpochSecond() * 1000L;
         msecs += instant.getNano() / 1000 / 1000;
+        */
+        long msecs = TimeUtils.currentTimeMsecs();
         StringBuilder s = new StringBuilder(prefix);
         this.transfrom(s, msecs, 62);
         return s.toString();
@@ -34,11 +38,14 @@ public abstract class StorageAware {
         return this.genAccount(this.configProperties.getIdGenPrefix());
     }
     public String genAccount(String prefix) throws Exception {
+        /*
         Instant instant = this.getInstant();
-        long usecs = instant.getEpochSecond() * 1000L * 1000L * 1000L;
-        usecs += instant.getNano();
+        long nsecs = instant.getEpochSecond() * 1000L * 1000L * 1000L;
+        nsecs += instant.getNano();
+        */
+        long nsecs = TimeUtils.currentTimeNsecs();
         StringBuilder s = new StringBuilder("naid_").append(prefix.toLowerCase());
-        this.transfrom(s, usecs, 36);
+        this.transfrom(s, nsecs, 36);
         return s.toString();
     }
 
@@ -48,9 +55,12 @@ public abstract class StorageAware {
         return this.genNdid(this.configProperties.getIdGenPrefix(), type);
     }
     public String genNdid(String prefix, DeviceType type) throws Exception {
+        /*
         Instant instant = this.getInstant();
         long usecs = instant.getEpochSecond() * 1000L * 1000L;
         usecs += instant.getNano() / 1000;
+        */
+        long usecs = TimeUtils.currentTimeUsecs();
         StringBuilder s = new StringBuilder().append(chars.charAt(type.getValue())).append(prefix);
         this.transfrom(s, usecs, 62);
         return s.toString();
