@@ -1,5 +1,6 @@
 package nurteen.prometheus.pc.framework;
 
+import nurteen.prometheus.pc.framework.entities.DeviceType;
 import nurteen.prometheus.pc.framework.entities.ThirdpartyAccountType;
 import nurteen.prometheus.pc.framework.entities.DeviceInfo;
 import nurteen.prometheus.pc.framework.entities.UserInfo;
@@ -43,14 +44,14 @@ public abstract class StorageAware {
 
     // ndid为12位
     // 1位（设备类型）+2位配置（不同服务器不一样）+取本地时间微秒值（转换位62进制后位9位）
-    public final String genNdid(int type) throws Exception {
+    public final String genNdid(DeviceType type) throws Exception {
         return this.genNdid(this.configProperties.getIdGenPrefix(), type);
     }
-    public String genNdid(String prefix, int type) throws Exception {
+    public String genNdid(String prefix, DeviceType type) throws Exception {
         Instant instant = this.getInstant();
         long usecs = instant.getEpochSecond() * 1000L * 1000L;
         usecs += instant.getNano() / 1000;
-        StringBuilder s = new StringBuilder().append(chars.charAt(type)).append(prefix);
+        StringBuilder s = new StringBuilder().append(chars.charAt(type.getValue())).append(prefix);
         this.transfrom(s, usecs, 62);
         return s.toString();
     }

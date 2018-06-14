@@ -106,7 +106,7 @@ public class MysqlStorageAware extends StorageAware {
 
     private <T> T nativeQuery(String sql, Class<T> type) throws Exception {
         List<T> list = this.nativeQueryList(sql, type);
-        if (list != null) {
+        if ((list != null) && (list.size() > 0)) {
             return list.get(0);
         }
         return null;

@@ -1,6 +1,7 @@
 package nurteen.prometheus.pc.framework;
 
 import nurteen.prometheus.pc.framework.entities.DeviceInfo;
+import nurteen.prometheus.pc.framework.entities.DevicePlatform;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
 
 public class ServerProperties {
@@ -12,19 +13,15 @@ public class ServerProperties {
         }
         
         synchronized (ServerProperties.class) {
-        	if (ndid != null) {
+        	if (ndid == null) {
 	            try {
 	            	DeviceInfo deviceInfo = ObjectFactory.storageAware.fromHid("");
-	            	if (deviceInfo != null) {
-	            		ndid = deviceInfo.getNdid();
-	            	}
-	            	else {
-	            		// ndid = ObjectFactory.storageAware.genNdid(DeviceType.Center_Pc);
-	            		deviceInfo = new DeviceInfo(DeviceType.Center_Pc, 1, "");
+	            	if (deviceInfo == null) {
+	            		deviceInfo = new DeviceInfo(DeviceType.Center_Pc, DevicePlatform.Linux, "");
 	            		ObjectFactory.storageAware.insertNew(deviceInfo);
-	            		ndid = deviceInfo.getNdid();
 	            	}
-	                
+
+					ndid = deviceInfo.getNdid();
 	            }
 	            catch (Exception e) {
 	                e.printStackTrace();

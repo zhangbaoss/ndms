@@ -1,6 +1,7 @@
 package nurteen.prometheus.pc.framework.authentication.argument;
 
 import nurteen.prometheus.pc.framework.Argument;
+import nurteen.prometheus.pc.framework.entities.DevicePlatform;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -73,10 +74,14 @@ public class LoginArgument extends Argument {
         @NotNull(message = "设备类型不能为空")
         @Range(min = 1, max = 6, message = "设备类型值不合法")
         Integer type;
+
         @NotNull(message = "设备运行平台不能为空")
+        @Range(min = 1, max = 7, message = "设备平台值不合法")
         Integer platform;
+
         @NotNull(message = "设备名称不能为空")
         String name;
+
         @NotNull(message = "设备硬件唯一标识不能为空")
         String hid;
 
@@ -108,5 +113,29 @@ public class LoginArgument extends Argument {
             this.hid = hid;
         }
 
+        public DeviceType getDeviceType() {
+            switch (type) {
+                case 1: return DeviceType.App_Browser;
+                case 2: return DeviceType.App_Mobile;
+                case 3: return DeviceType.App_Pc;
+                case 4: return DeviceType.Controller_Mobile;
+                case 5: return DeviceType.Controller_Pc;
+                case 6: return DeviceType.Center_Pc;
+                default: return null;
+            }
+        }
+
+        public DevicePlatform getDevicePlatform() {
+            switch (type) {
+                case 1: return DevicePlatform.Browser;
+                case 2: return DevicePlatform.Windows;
+                case 3: return DevicePlatform.Linux;
+                case 4: return DevicePlatform.Unix;
+                case 5: return DevicePlatform.MacOS;
+                case 6: return DevicePlatform.IOS;
+                case 7: return DevicePlatform.Android;
+                default: return null;
+            }
+        }
     }
 }

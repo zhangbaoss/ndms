@@ -16,6 +16,6 @@ public class IdGenUtils {
 
     // ndid
     public static final String genNdid(DeviceType type) throws Exception {
-        return ObjectFactory.storageAware.genNdid(type.getValue());
+        return ObjectFactory.storageAware.genNdid(type);
     }
 }

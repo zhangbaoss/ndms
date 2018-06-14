@@ -1,7 +1,6 @@
 package nurteen.prometheus.pc.framework.web.socket;
 
 import nurteen.prometheus.pc.framework.ServerProperties;
-import nurteen.prometheus.pc.framework.utils.JsonUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

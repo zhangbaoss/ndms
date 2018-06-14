@@ -20,10 +20,10 @@ public class DeviceInfo {
 
     public DeviceInfo() {
     }
-    public DeviceInfo(Integer type, Integer platform, String hid) throws Exception {
+    public DeviceInfo(DeviceType type, DevicePlatform platform, String hid) throws Exception {
         this.ndid = ObjectFactory.storageAware.genNdid(type);
-        this.type = type;
-        this.platform = platform;
+        this.type = type.getValue();
+        this.platform = platform.getValue();
         this.hid = hid;
     }
 
