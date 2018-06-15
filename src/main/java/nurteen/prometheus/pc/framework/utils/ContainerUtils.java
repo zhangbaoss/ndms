@@ -125,6 +125,10 @@ public class ContainerUtils {
         list.add(value);
         return list;
     }
+    public static <Value> List<Value> add(List<Value> list, Collection<? extends Value> values) {
+        list.addAll(values);
+        return list;
+    }
 
     public static <Key1, Value> void addArrayList(Map<Key1, List<Value>> map, Key1 key1, Value value) {
         List<Value> list = map.get(key1);

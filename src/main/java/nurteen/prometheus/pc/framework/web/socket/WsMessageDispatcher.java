@@ -78,7 +78,7 @@ public class WsMessageDispatcher {
 
             @Override
             public void reject(Reason reason) {
-                response.reject(reason);
+                response.reject(new ArrayList<>(), reason);
             }
         });
     }
@@ -89,7 +89,7 @@ public class WsMessageDispatcher {
         } else if (endpoint.sendRequestReq(url, msgId, target, payload)) {
             respHandlers.put(msgId, new ResponseHandler(timeout, response));
         } else {
-            response.reject(Reason.error("Send Failed"));
+            response.reject(new ArrayList<>(), Reason.error("Send Failed"));
         }
     }
 
@@ -160,6 +160,10 @@ public class WsMessageDispatcher {
             // System.out.println(String.format("message, from = %s, source = %s, target = %s, msgId = %s, url = %s, type = %s.", endpoint.ndid, msg.source, msg.target, msg.msgId, msg.url, msg.type.toString()));
             switch (msg.getType()) {
                 case RequestReq: {
+                    if (msg.forMe()) {
+                        endpoint.sendRequestReachedResp(msg.getUrl(), msg.getMsgId(), ServerProperties.getNdidList());
+                    }
+
                     Handler handler = reqHandlers.get(msg.getUrl());
                     if (handler != null) {
                         if (handler.method.getParameterTypes().length == 1) {
@@ -170,17 +174,35 @@ public class WsMessageDispatcher {
                     } else if (!msg.forMe()) {
                         request(msg, 10000, new WsResponse() {
                             @Override
+                            public void resolve(List<String> routes) {
+                                endpoint.sendRequestReachedResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(ServerProperties.getNdidList(), routes));
+                            }
+
+                            @Override
                             public void resolve(WsMessage resp) {
                                 msg.response(resp.getPayload());
                             }
 
                             @Override
-                            public void reject(Reason reason) {
-                                System.out.println("request fail. target = " + msg.message.target + ", url = " + msg.message.url);
+                            public void reject(List<String> routes, Reason reason) {
+                                // System.out.println("request fail. target = " + msg.message.target + ", url = " + msg.message.url);
+                                endpoint.sendRequestReachedResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(ServerProperties.getNdidList(), routes), reason);
                             }
                         });
                     } else {
                         System.out.println("no request mapping method. url = " + msg.message.url);
+                    }
+                    break;
+                }
+                case RequestReachedResp: {
+                    ResponseHandler handler = respHandlers.get(msg.getMsgId());
+                    if (handler != null) {
+                        Message.ReachedRespPayload payload = msg.getPayload(Message.ReachedRespPayload.class);
+                        if (payload.reason.getStatus() == Reason.Status.Ok) {
+                            handler.resolve(payload.routes);
+                        } else {
+                            handler.reject(payload.routes, payload.reason);
+                        }
                     }
                     break;
                 }
@@ -195,7 +217,7 @@ public class WsMessageDispatcher {
                     break;
                 case ForwardReq: {
                     if (msg.forMe()) {
-                        endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.makeArrayList(ServerProperties.getNdid()).get());
+                        endpoint.sendForwardReachedResp(msg.getUrl(), msg.getMsgId(), ServerProperties.getNdidList());
                     }
 
                     Handler handler = reqHandlers.get(msg.getUrl());
@@ -209,12 +231,12 @@ public class WsMessageDispatcher {
                         forward(msg, 10000, new WsRouteResponse() {
                             @Override
                             public void resolve(List<String> routes) {
-                                endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(routes, ServerProperties.getNdid()));
+                                endpoint.sendForwardReachedResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(ServerProperties.getNdidList(), routes));
                             }
 
                             @Override
                             public void reject(List<String> routes, Reason reason) {
-                                endpoint.sendForwardResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(routes, ServerProperties.getNdid()), reason);
+                                endpoint.sendForwardReachedResp(msg.getUrl(), msg.getMsgId(), ContainerUtils.add(ServerProperties.getNdidList(), routes), reason);
                             }
                         });
                     } else {
@@ -222,11 +244,11 @@ public class WsMessageDispatcher {
                     }
                     break;
                 }
-                case ForwardResp: {
+                case ForwardReachedResp: {
                     RouteResponseHandler handler = routeRespHandlers.remove(msg.getMsgId());
                     if (handler != null) {
-                        Message.RoutePayload payload = msg.getPayload(Message.RoutePayload.class);
-                        if (payload.reason == null) {
+                        Message.ReachedRespPayload payload = msg.getPayload(Message.ReachedRespPayload.class);
+                        if (payload.reason.getStatus() == Reason.Status.Ok) {
                             handler.resolve(payload.routes);
                         } else {
                             handler.reject(payload.routes, payload.reason);
@@ -397,20 +419,21 @@ public class WsMessageDispatcher {
             LoginReq,
             LoginResp,
             RequestReq,
+            RequestReachedResp,
             RequestResp,
             RequestBatchResp,
             ForwardReq,
-            ForwardResp,
+            ForwardReachedResp,
         }
 
-        static class RoutePayload {
+        static class ReachedRespPayload {
             List<String> routes;
             Reason reason;
 
-            public RoutePayload() {
+            public ReachedRespPayload() {
             }
 
-            public RoutePayload(List<String> routes, Reason reason) {
+            public ReachedRespPayload(List<String> routes, Reason reason) {
                 this.routes = routes;
                 this.reason = reason;
             }
@@ -459,6 +482,13 @@ public class WsMessageDispatcher {
             this.response = response;
         }
 
+        void resolve(List<String> routes) {
+            try {
+                this.response.resolve(routes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         void resolve(WsMessage message) {
             try {
                 this.response.resolve(message);
@@ -466,9 +496,9 @@ public class WsMessageDispatcher {
                 e.printStackTrace();
             }
         }
-        void reject(Reason reason) {
+        void reject(List<String> routes, Reason reason) {
             try {
-                this.response.reject(reason);
+                this.response.reject(routes, reason);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -6,6 +6,8 @@ import nurteen.prometheus.pc.framework.web.socket.*;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsController;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
 
+import java.util.List;
+
 @WsController
 public class WsAppMobileController {
 
@@ -43,14 +45,25 @@ public class WsAppMobileController {
 
         WsMessageDispatcher.request(msg, "server processed", 10000, new WsResponse() {
             @Override
+            public void resolve(List<String> routes) {
+                System.out.println("request message arrive target. url = " + msg.getUrl());
+                for (String route : routes) {
+                    System.out.println("route = " + route);
+                }
+            }
+
+            @Override
             public void resolve(WsMessage message) {
                 System.out.println("server get response message: " + msg.getPayload());
                 msg.response(message.getPayload());
             }
 
             @Override
-            public void reject(Reason reason) {
-                System.out.println("server request failed");
+            public void reject(List<String> routes, Reason reason) {
+                System.out.println("request message not arrive target. url = " + msg.getUrl() + ", reason: " + reason.getMessage());
+                for (String route : routes) {
+                    System.out.println("route = " + route);
+                }
             }
         });
     }

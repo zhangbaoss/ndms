@@ -76,6 +76,20 @@ public class WsEndpoint {
         return sendMsg(message);
     }
 
+    public boolean sendRequestReachedResp(String url, String msgId, List<String> routes) {
+        return sendRequestReachedResp(url, msgId, routes, Reason.ok("请求消息成功到达目标"));
+    }
+
+    public boolean sendRequestReachedResp(String url, String msgId, List<String> routes, Reason reason) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.RequestReachedResp;
+        message.url = url;
+        message.msgId = msgId;
+        WsMessageDispatcher.Message.ReachedRespPayload payload = new WsMessageDispatcher.Message.ReachedRespPayload(routes, reason);
+        message.payload = JsonUtils.toJSON(payload);
+        return sendMsg(message);
+    }
+
     public boolean sendRequestResp(String url, String msgId, String payload) {
         WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
         message.type = WsMessageDispatcher.Message.Type.RequestResp;
@@ -95,16 +109,17 @@ public class WsEndpoint {
         return sendMsg(message);
     }
 
-    public boolean sendForwardResp(String url, String msgId, List<String> routes) {
-        return sendForwardResp(url, msgId, routes, null);
+    public boolean sendForwardReachedResp(String url, String msgId, List<String> routes) {
+        return sendForwardReachedResp(url, msgId, routes, Reason.ok("转发消息成功到达目标"));
     }
 
-    public boolean sendForwardResp(String url, String msgId, List<String> routes, Reason reason) {
+    public boolean sendForwardReachedResp(String url, String msgId, List<String> routes, Reason reason) {
         WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
-        message.type = WsMessageDispatcher.Message.Type.ForwardResp;
+        message.type = WsMessageDispatcher.Message.Type.ForwardReachedResp;
         message.url = url;
         message.msgId = msgId;
-        message.payload = JsonUtils.toJSON(new WsMessageDispatcher.Message.RoutePayload(routes, reason));
+        WsMessageDispatcher.Message.ReachedRespPayload payload = new WsMessageDispatcher.Message.ReachedRespPayload(routes, reason);
+        message.payload = JsonUtils.toJSON(payload);
         return sendMsg(message);
     }
 
