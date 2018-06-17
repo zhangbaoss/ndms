@@ -3,72 +3,11 @@ package nurteen.prometheus.pc.framework.authentication.argument;
 import nurteen.prometheus.pc.framework.Argument;
 import nurteen.prometheus.pc.framework.entities.DevicePlatform;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
 
 public class LoginArgument extends Argument {
-    @NotNull(message = "账号不能为空")
-    @Length(min = 1, max = 128, message = "账号长度为1~128个字符")
-    String account;
-    @NotNull(message = "密码不能为空")
-    @Length(min = 32, max = 32, message = "密码无效")
-    String passwd;
-    @NotNull(message = "验证码不能为空")
-    @Length(min = 5, max = 5, message = "验证码无效")
-    String verifyCode;
-    @NotNull(message = "设备信息不能为空")
-    LoginArgument.Device device;
-    @NotNull(message = "loginTime不能为空")
-    @Length(min = 19, max = 19, message = "loginTime无效")
-    String loginTime;
-    @NotNull(message = "secretKey不能为空")
-    @Length(min = 32, max = 32, message = "secretKey无效")
-    String secretKey;
-
-    public String getAccount() {
-        return account;
-    }
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public String getVerifyCode() {
-        return verifyCode;
-    }
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
-    }
-
-    public Device getDevice() {
-        return device;
-    }
-    public void setDevice(Device device) {
-        this.device = device;
-    }
-
-    public String getLoginTime() {
-        return loginTime;
-    }
-    public void setLoginTime(String loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
 
     public static class Device {
         @NotNull(message = "设备类型不能为空")

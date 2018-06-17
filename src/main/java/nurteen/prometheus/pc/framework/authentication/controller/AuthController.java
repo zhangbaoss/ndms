@@ -1,8 +1,9 @@
 package nurteen.prometheus.pc.framework.authentication.controller;
 
 import nurteen.prometheus.pc.framework.*;
-import nurteen.prometheus.pc.framework.authentication.argument.NaLoginArgument;
-import nurteen.prometheus.pc.framework.authentication.argument.WXaLoginArgument;
+import nurteen.prometheus.pc.framework.authentication.argument.AccountLoginArgument;
+import nurteen.prometheus.pc.framework.authentication.argument.PhoneLoginArgument;
+import nurteen.prometheus.pc.framework.authentication.argument.WxLoginArgument;
 import nurteen.prometheus.pc.framework.authentication.response.WXaLoginResponse;
 import nurteen.prometheus.pc.framework.entities.DeviceInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
@@ -23,8 +24,8 @@ public class AuthController {
     @Autowired
     protected ServerConfigProperties configProperties;
 
-    @RequestMapping(path = "/devices/authentication/nalogin")
-    public @ResponseBody Response login(HttpServletRequest request, HttpServletResponse response, @RequestBody NaLoginArgument args) {
+    @RequestMapping(path = "/devices/auth/login/account/v1")
+    public @ResponseBody Response accountLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody AccountLoginArgument args) {
         /*
         NaLoginResponse reps = new NaLoginResponse();
         String accessToken = request.getSession().getId();
@@ -34,8 +35,19 @@ public class AuthController {
         return Response.ok("ok");
     }
 
-    @RequestMapping(path = "/devices/authentication/wxalogin", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public @ResponseBody Response wxalogin(HttpServletRequest request, HttpServletResponse response, @RequestBody WXaLoginArgument argument) throws Exception {
+    @RequestMapping(path = "/devices/auth/login/phone/v1")
+    public @ResponseBody Response phoneLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody PhoneLoginArgument argument) {
+        /*
+        NaLoginResponse reps = new NaLoginResponse();
+        String accessToken = request.getSession().getId();
+        CookieUtils.setAccessToken(response, accessToken);
+        return Response.ok("ok", reps);
+        */
+        return Response.ok("ok");
+    }
+
+    @RequestMapping(path = "/devices/auth/login/wx/v1", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody Response wxLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody WxLoginArgument argument) throws Exception {
         argument.validate();
 
         // 使用WX接口进行认证

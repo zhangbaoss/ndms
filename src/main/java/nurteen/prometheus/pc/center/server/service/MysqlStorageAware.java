@@ -93,7 +93,7 @@ public class MysqlStorageAware extends StorageAware {
             this.nativeExecuteUpdate(sql);
         }
         else if (!oldName.equals(name)) {
-            String sql = String.format("update t_user_devices set name='%s' where nuid='%s' and ndid='%s'", nuid, ndid);
+            String sql = String.format("update t_user_devices set name='%s' where nuid='%s' and ndid='%s'", name, nuid, ndid);
             this.nativeExecuteUpdate(sql);
         }
     }

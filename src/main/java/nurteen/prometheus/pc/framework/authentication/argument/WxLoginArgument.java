@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
-public class WXaLoginArgument extends Argument {
+public class WxLoginArgument extends LoginArgument {
     private static final String _wxaencfront = "prometheus.wxa.encfront[";
     private static final String _wxaencback = "]prometheus.wxa.encback";
 
@@ -14,7 +14,7 @@ public class WXaLoginArgument extends Argument {
     String code;
 
     @NotNull(message = "设备信息不能为空")
-    LoginArgument.Device device;
+    Device device;
 
     @NotNull(message = "loginTime不能为空")
     @Length(min = 19, max = 19, message = "loginTime无效")
@@ -38,10 +38,10 @@ public class WXaLoginArgument extends Argument {
         this.code = code;
     }
 
-    public LoginArgument.Device getDevice() {
+    public Device getDevice() {
         return device;
     }
-    public void setDevice(LoginArgument.Device device) {
+    public void setDevice(Device device) {
         this.device = device;
     }
 
@@ -64,12 +64,12 @@ public class WXaLoginArgument extends Argument {
         super.validate();
 
         /*
-        String passwdChk = Md5Utils.md5(_wxaencfront + Md5Utils.md5(account) + _wxaencback);
+        String passwdChk = Md5Utils.md5(_wxaencfront + Md5Utils.md5(phone) + _wxaencback);
         if (!this.passwd.equals(passwdChk)) {
             throw new InvalidArgumentException("密码校验失败");
         }
 
-        String original = String.format("{'account':'%s','passwd':'%s','deviceArgs':{'type':'%d','name':'%s','platform':'%d','hid':'%s'},'loginTime':'%s'}", account, passwd, deviceArgs.type, deviceArgs.name, deviceArgs.platform, deviceArgs.hid, loginTime);
+        String original = String.format("{'phone':'%s','passwd':'%s','deviceArgs':{'type':'%d','name':'%s','platform':'%d','hid':'%s'},'loginTime':'%s'}", phone, passwd, deviceArgs.type, deviceArgs.name, deviceArgs.platform, deviceArgs.hid, loginTime);
         String secretKeyChk = Md5Utils.md5(_wxaencfront + Md5Utils.md5(original) + _wxaencback);
         if (!this.secretKey.equals(secretKeyChk)) {
             throw new InvalidArgumentException("参数校验失败");
