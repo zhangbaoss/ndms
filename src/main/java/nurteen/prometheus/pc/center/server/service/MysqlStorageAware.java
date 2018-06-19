@@ -104,6 +104,12 @@ public class MysqlStorageAware extends StorageAware {
         this.nativeExecuteUpdate(sql);
     }
 
+    @Override
+    public void insertNew(String nuid, String name, DeviceInfo deviceInfo) throws Exception {
+        insertNew(deviceInfo);
+        insertNew(nuid, deviceInfo.getNdid(), name);
+    }
+
     private <T> T nativeQuery(String sql, Class<T> type) throws Exception {
         List<T> list = this.nativeQueryList(sql, type);
         if ((list != null) && (list.size() > 0)) {

@@ -13,9 +13,6 @@ public class WxLoginArgument extends LoginArgument {
     String product;
     String code;
 
-    @NotNull(message = "设备信息不能为空")
-    Device device;
-
     @NotNull(message = "loginTime不能为空")
     @Length(min = 19, max = 19, message = "loginTime无效")
     String loginTime;

@@ -83,6 +83,7 @@ public abstract class StorageAware {
     public abstract String getDeviceName(String nuid, String ndid) throws Exception;
     public abstract void insertNew(String nuid, String ndid, String name) throws Exception;
     public abstract void insertNew(DeviceInfo deviceInfo) throws Exception;
+    public abstract void insertNew(String nuid, String name, DeviceInfo deviceInfo) throws Exception;
 
     // 进制转换，值被反转
     private void transfrom(StringBuilder s, long val, int radix) {

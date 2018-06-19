@@ -22,9 +22,6 @@ public class PhoneLoginArgument extends LoginArgument {
     @Length(min = 5, max = 5, message = "验证码无效")
     String verifyCode;
 
-    @NotNull(message = "设备信息不能为空")
-    Device device;
-
     @NotNull(message = "loginTime不能为空")
     @Length(min = 19, max = 19, message = "loginTime无效")
     String loginTime;

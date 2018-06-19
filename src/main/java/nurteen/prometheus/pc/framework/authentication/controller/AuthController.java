@@ -2,9 +2,10 @@ package nurteen.prometheus.pc.framework.authentication.controller;
 
 import nurteen.prometheus.pc.framework.*;
 import nurteen.prometheus.pc.framework.authentication.argument.AccountLoginArgument;
+import nurteen.prometheus.pc.framework.authentication.argument.LoginArgument;
 import nurteen.prometheus.pc.framework.authentication.argument.PhoneLoginArgument;
 import nurteen.prometheus.pc.framework.authentication.argument.WxLoginArgument;
-import nurteen.prometheus.pc.framework.authentication.response.WXaLoginResponse;
+import nurteen.prometheus.pc.framework.authentication.response.WxLoginResponse;
 import nurteen.prometheus.pc.framework.entities.DeviceInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
 import nurteen.prometheus.pc.framework.entities.ThirdpartyAccountType;
@@ -36,14 +37,17 @@ public class AuthController {
     }
 
     @RequestMapping(path = "/devices/auth/login/phone/v1")
-    public @ResponseBody Response phoneLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody PhoneLoginArgument argument) {
-        /*
-        NaLoginResponse reps = new NaLoginResponse();
-        String accessToken = request.getSession().getId();
-        CookieUtils.setAccessToken(response, accessToken);
-        return Response.ok("ok", reps);
-        */
-        return Response.ok("ok");
+    public @ResponseBody Response phoneLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody PhoneLoginArgument argument) throws Exception {
+        argument.validate();
+
+        UserInfo userInfo = ObjectFactory.storageAware.fromPhone(argument.getPhone(), argument.getPasswd());
+        if (userInfo == null) {
+            return Response.failed("手机号或者密码错误");
+        }
+
+        DeviceInfo deviceInfo = this.getDevice(userInfo.getNuid(), argument.getDevice());
+
+        return loginSuccess(request, response, userInfo, deviceInfo);
     }
 
     @RequestMapping(path = "/devices/auth/login/wx/v1", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -59,27 +63,32 @@ public class AuthController {
             ObjectFactory.storageAware.insertNewFromThirdparty(userInfo, ThirdpartyAccountType.WX, argument.getProduct());
         }
 
-        DeviceInfo deviceInfo;
-        if (argument.getDevice().getType() == DeviceType.App_Browser.getValue()) {
-            deviceInfo = new DeviceInfo(DeviceType.App_Browser, argument.getDevice().getDevicePlatform(), argument.getDevice().getHid());
-        }
-        else {
-            deviceInfo = ObjectFactory.storageAware.fromHid(argument.getDevice().getHid());
-            if (deviceInfo != null) {
-                ObjectFactory.storageAware.insertNew(userInfo.getNuid(), deviceInfo.getNdid(), argument.getDevice().getName());
-            }
-            else {
-                deviceInfo = new DeviceInfo(argument.getDevice().getDeviceType(), argument.getDevice().getDevicePlatform(), argument.getDevice().getHid());
-                ObjectFactory.storageAware.insertNew(deviceInfo);
-                ObjectFactory.storageAware.insertNew(userInfo.getNuid(), deviceInfo.getNdid(), argument.getDevice().getName());
-            }
-        }
+        DeviceInfo deviceInfo = this.getDevice(userInfo.getNuid(), argument.getDevice());
 
+        return loginSuccess(request, response, userInfo, deviceInfo);
+    }
+
+    private Response loginSuccess(HttpServletRequest request, HttpServletResponse response, UserInfo userInfo, DeviceInfo deviceInfo) {
         String accessToken = ObjectFactory.cacheAware.genAccessToken(request);
-        ObjectFactory.cacheAware.updateAccessToken(accessToken, userInfo.getNuid(), deviceInfo.getNdid(), argument.getDevice().getType(), Constants.DEFAULT_SESSION_TIMEOUT);
+        ObjectFactory.cacheAware.updateAccessToken(accessToken, userInfo.getNuid(), deviceInfo.getNdid(), deviceInfo.getDeviceType(), Constants.DEFAULT_SESSION_TIMEOUT);
 
-        WXaLoginResponse loginResponse = new WXaLoginResponse(userInfo.getNuid(), deviceInfo.getNdid(), accessToken, userInfo.getNickname(), userInfo.getHeadimg());
+        WxLoginResponse loginResponse = new WxLoginResponse(userInfo.getNuid(), deviceInfo.getNdid(), accessToken, userInfo.getNickname(), userInfo.getHeadimg());
         CookieUtils.setAccessToken(response, accessToken);
         return Response.ok("ok", loginResponse);
+    }
+
+    private DeviceInfo getDevice(String nuid, LoginArgument.Device device) throws Exception {
+        if (device.getType() == DeviceType.App_Browser.getValue()) {
+            return new DeviceInfo(DeviceType.App_Browser, device.getDevicePlatform(), device.getHid());
+        } else {
+            DeviceInfo deviceInfo = ObjectFactory.storageAware.fromHid(device.getHid());
+            if (deviceInfo != null) {
+                ObjectFactory.storageAware.insertNew(nuid, deviceInfo.getNdid(), device.getName());
+            } else {
+                deviceInfo = new DeviceInfo(device.getDeviceType(), device.getDevicePlatform(), device.getHid());
+                ObjectFactory.storageAware.insertNew(nuid, device.getName(), deviceInfo);
+            }
+            return deviceInfo;
+        }
     }
 }

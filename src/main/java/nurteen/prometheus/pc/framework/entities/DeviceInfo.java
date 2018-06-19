@@ -1,6 +1,7 @@
 package nurteen.prometheus.pc.framework.entities;
 
 import nurteen.prometheus.pc.framework.ObjectFactory;
+import nurteen.prometheus.pc.framework.authentication.argument.LoginArgument;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,5 +54,29 @@ public class DeviceInfo {
     }
     public void setHid(String hid) {
         this.hid = hid;
+    }
+
+    public DeviceType getDeviceType() {
+        switch (type) {
+            case 1: return DeviceType.App_Browser;
+            case 2: return DeviceType.App_Mobile;
+            case 3: return DeviceType.App_Pc;
+            case 4: return DeviceType.Controller_Mobile;
+            case 5: return DeviceType.Controller_Pc;
+            case 6: return DeviceType.Center_Pc;
+            default: return null;
+        }
+    }
+    public DevicePlatform getDevicePlatform() {
+        switch (type) {
+            case 1: return DevicePlatform.Browser;
+            case 2: return DevicePlatform.Windows;
+            case 3: return DevicePlatform.Linux;
+            case 4: return DevicePlatform.Unix;
+            case 5: return DevicePlatform.MacOS;
+            case 6: return DevicePlatform.IOS;
+            case 7: return DevicePlatform.Android;
+            default: return null;
+        }
     }
 }

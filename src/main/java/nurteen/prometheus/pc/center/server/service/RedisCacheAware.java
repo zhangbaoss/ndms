@@ -4,6 +4,7 @@ import nurteen.prometheus.pc.framework.CacheAware;
 import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.entities.AccessTokenInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
+import nurteen.prometheus.pc.framework.entities.DeviceType;
 import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.RedisUtils;
 import org.springframework.stereotype.Service;
@@ -61,10 +62,10 @@ public class RedisCacheAware extends CacheAware {
     }
 
     @Override
-    public void updateAccessToken(String accessToken, String nuid, String ndid, int type, int timeout) {
+    public void updateAccessToken(String accessToken, String nuid, String ndid, DeviceType type, int timeout) {
         try {
             Jedis jedis = RedisUtils.getJedis();
-            jedis.hmset(accessToken, ContainerUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type)).get());
+            jedis.hmset(accessToken, ContainerUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type.getValue())).get());
             jedis.expire(accessToken, timeout);
             RedisUtils.releaseJedis(jedis);
         }

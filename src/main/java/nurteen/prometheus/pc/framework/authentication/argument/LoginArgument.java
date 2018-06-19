@@ -3,11 +3,15 @@ package nurteen.prometheus.pc.framework.authentication.argument;
 import nurteen.prometheus.pc.framework.Argument;
 import nurteen.prometheus.pc.framework.entities.DevicePlatform;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
+import nurteen.prometheus.pc.framework.exception.InvalidArgumentException;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
 
 public class LoginArgument extends Argument {
+
+    @NotNull(message = "设备信息不能为空")
+    Device device;
 
     public static class Device {
         @NotNull(message = "设备类型不能为空")
@@ -63,7 +67,6 @@ public class LoginArgument extends Argument {
                 default: return null;
             }
         }
-
         public DevicePlatform getDevicePlatform() {
             switch (type) {
                 case 1: return DevicePlatform.Browser;
