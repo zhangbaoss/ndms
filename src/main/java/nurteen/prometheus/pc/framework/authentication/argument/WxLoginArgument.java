@@ -1,6 +1,5 @@
 package nurteen.prometheus.pc.framework.authentication.argument;
 
-import nurteen.prometheus.pc.framework.Argument;
 import nurteen.prometheus.pc.framework.exception.InvalidArgumentException;
 import org.hibernate.validator.constraints.Length;
 

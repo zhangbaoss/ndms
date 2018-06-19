@@ -25,7 +25,7 @@ public class AuthController {
     @Autowired
     protected ServerConfigProperties configProperties;
 
-    @RequestMapping(path = "/devices/auth/login/account/v1")
+    @RequestMapping(path = "/devices/auth/login/account/v1", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response accountLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody AccountLoginArgument args) {
         /*
         NaLoginResponse reps = new NaLoginResponse();
@@ -36,7 +36,7 @@ public class AuthController {
         return Response.ok("ok");
     }
 
-    @RequestMapping(path = "/devices/auth/login/phone/v1")
+    @RequestMapping(path = "/devices/auth/login/phone/v1", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody Response phoneLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody PhoneLoginArgument argument) throws Exception {
         argument.validate();
 
