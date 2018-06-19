@@ -5,8 +5,12 @@ import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.entities.AccessTokenInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
+import nurteen.prometheus.pc.framework.session.SessionSharingSession;
 import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.RedisUtils;
+import nurteen.prometheus.pc.framework.utils.SerializeUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
@@ -15,13 +19,17 @@ import java.util.List;
 @Service
 public class RedisCacheAware extends CacheAware {
 
+	@Autowired
+	RedisUtils redisUtils;
+	
+	/**
+	 * 检查给定的accessToken是否存在
+	 */
     @Override
     public boolean hasAccessToken(String accessToken) {
         boolean exists = false;
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+        try(Jedis jedis = redisUtils.getJedis()) {
             exists = jedis.exists(accessToken);
-            RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -29,14 +37,16 @@ public class RedisCacheAware extends CacheAware {
         return exists;
     }
 
+    /**
+	 * 返回对应accessToken的map表中"nuid", "ndid", "type"所对应的值。
+	 * 如果给定的域（即"nuid", "ndid", "type"）不存在于哈希表（map），那么返回一个 null 值。
+	 */
     @Override
     public AccessTokenInfo getAccessTokenInfo(String accessToken) {
-        try {
+    	try(Jedis jedis = redisUtils.getJedis()) {
             List<String> values;
 
-            Jedis jedis = RedisUtils.getJedis();
             values = jedis.hmget(accessToken, "nuid", "ndid", "type");
-            RedisUtils.releaseJedis(jedis);
 
             if (ContainerUtils.notNull(values, 3)) {
                 return new AccessTokenInfo(values.get(0), values.get(1), Integer.valueOf(values.get(2)));
@@ -49,61 +59,70 @@ public class RedisCacheAware extends CacheAware {
         return null;
     }
 
+    /**
+     * 更新对应的accessToken的失效时间
+     */
     @Override
     public void updateAccessToken(String accessToken, int timeout) {
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+    	try(Jedis jedis = redisUtils.getJedis()) {
             jedis.expire(accessToken, timeout);
-            RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 将用户所对应的信息存入redis中
+	 * 同时将多个 field-value (域-值)对设置到哈希表 key 中。
+	 * 此命令会覆盖哈希表中已存在的域。
+	 * 如果 key 不存在，一个空哈希表被创建并执行 HMSET 操作。
+	 * 一个key对应一个map集合
+	 */
     @Override
     public void updateAccessToken(String accessToken, String nuid, String ndid, DeviceType type, int timeout) {
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+        try(Jedis jedis = redisUtils.getJedis()) {
             jedis.hmset(accessToken, ContainerUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type.getValue())).get());
             jedis.expire(accessToken, timeout);
-            RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 将设备信息存入redis中
+     */
     @Override
     public void addDevice(String ndid, String nuid, int type) {
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+    	try(Jedis jedis = redisUtils.getJedis()) {
             jedis.hmset(ndid, ContainerUtils.make("nuid", nuid).put("type", Integer.toString(type)).put("serverNdid", ServerProperties.getNdid()).put("serverAddress", configProperties.getServerAddress()).get());
-            RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 设备掉线即将设备信息从redis中移除
+     */
     @Override
     public void removeDevice(String ndid) {
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+    	try(Jedis jedis = redisUtils.getJedis()) {
             jedis.del(ndid);
-            RedisUtils.releaseJedis(jedis);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 查找在线设备信息
+     */
     @Override
     public DeviceOnlineInfo findDeviceOnlineInfo(String ndid) {
-        try {
-            Jedis jedis = RedisUtils.getJedis();
+    	try(Jedis jedis = redisUtils.getJedis()) {
             List<String> values = jedis.hmget(ndid, "nuid", "type", "serverNdid", "serverAddress");
-            RedisUtils.releaseJedis(jedis);
 
             if (ContainerUtils.notNull(values, 4)) {
                 return new DeviceOnlineInfo(values.get(0), Integer.valueOf(values.get(1)), values.get(2), values.get(3));
@@ -115,4 +134,58 @@ public class RedisCacheAware extends CacheAware {
         }
         return null;
     }
+
+    /**
+     * 获取session
+     */
+	@Override
+	public SessionSharingSession getSession(String sessionId) {
+		try(Jedis jedis = redisUtils.getJedis()) {
+			SessionSharingSession sss = (SessionSharingSession)SerializeUtil.bytesToObj(jedis.get(SerializeUtil.objToBytes(sessionId)));
+			return sss;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 更新session过期时间
+	 */
+	@Override
+	public Long expire(Object key, int seconds) {
+		try(Jedis jedis = redisUtils.getJedis()) {
+			return jedis.expire(SerializeUtil.objToBytes(key), seconds);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 将session存入redis
+	 */
+	@Override
+	public void setSession(String sessionId, SessionSharingSession session) {
+		try(Jedis jedis = redisUtils.getJedis()) {
+			jedis.set(SerializeUtil.objToBytes(sessionId), SerializeUtil.objToBytes(session));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 删除session
+	 */
+	@Override
+	public void delSession(String sessionId) {
+		if (sessionId == null) {
+			throw new IllegalArgumentException("sessionId can not null");
+		}
+		try(Jedis jedis = redisUtils.getJedis()) {
+			jedis.del(SerializeUtil.objToBytes(sessionId));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

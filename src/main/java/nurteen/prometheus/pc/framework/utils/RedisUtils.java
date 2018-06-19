@@ -1,33 +1,56 @@
 package nurteen.prometheus.pc.framework.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import nurteen.prometheus.pc.framework.ServerConfigProperties;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
+@Service
 public class RedisUtils {
-    static JedisPool jedisPool = null;
+	
+	@Autowired
+    protected ServerConfigProperties configProperties;
+	
+	JedisPool jedisPool;
+	
+	public void initJedisPool() {
+		JedisPoolConfig config = new JedisPoolConfig();
+		config.setMaxTotal(configProperties.getRedisPoolMaxTotal());
+		config.setMaxIdle(configProperties.getRedisPoolMaxIdle());
+		config.setMaxWaitMillis(configProperties.getRedisPoolMaxWaitMillis());
+		config.setTestOnBorrow(configProperties.getRedisPoolTestOnBorrow());
+		jedisPool = new JedisPool(config, configProperties.getRedisHost(), configProperties.getRedisPort(),
+				configProperties.getRedisTimeout(), configProperties.getRedisPassword());
+	}
 
-    static{
-        JedisPoolConfig config = new JedisPoolConfig();
-        //控制一个pool可分配多少个jedis实例，通过pool.getResource()来获取；
-        //如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
-        config.setMaxTotal(500);
-        //控制一个pool最多有多少个状态为idle(空闲的)的jedis实例。
-        config.setMaxIdle(5);
-        //表示当borrow(引入)一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException；
-        config.setMaxWaitMillis(1000 * 100);
-        //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
-        config.setTestOnBorrow(true);
-
-        jedisPool= new JedisPool(config,"118.24.158.247",6379, 3000, "123456");
-
+    public Jedis getJedis(){
+    	Jedis jedis = null;
+		try {
+            jedis = jedisPool.getResource();
+        } catch (JedisConnectionException e) {
+        	String message = e.getMessage().trim();
+        	if("Could not get a resource from the pool".equalsIgnoreCase(message)){
+        		System.out.println("++++++++++请检查你的redis服务++++++++");
+        		System.out.println("|①.请检查是否安装redis服务|");
+        		System.out.println("|②.请检查redis 服务是否启动。|");
+        		System.out.println("|③.请检查redis启动是否有密码。|");
+        		System.out.println("|④.请检查redis启动端口是否有变化（默认6379）|");
+        		
+        		System.out.println("项目退出中....生产环境中，请删除这些东西。我来自。RedisUtils.java line:43");
+        		System.exit(0);//停止项目
+        	}
+        	throw new JedisConnectionException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+		return jedis;
     }
 
-    public static Jedis getJedis(){
-        return jedisPool.getResource();
-    }
-
-    public static void releaseJedis(Jedis jedis){
+    public void releaseJedis(Jedis jedis){
         jedis.close();
     }
 }

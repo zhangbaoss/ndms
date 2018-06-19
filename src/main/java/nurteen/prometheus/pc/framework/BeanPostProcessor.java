@@ -1,5 +1,6 @@
 package nurteen.prometheus.pc.framework;
 
+import nurteen.prometheus.pc.framework.utils.RedisUtils;
 import nurteen.prometheus.pc.framework.web.socket.WsMessageDispatcher;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsController;
 import nurteen.prometheus.pc.framework.web.socket.annotation.WsOnMessage;
@@ -17,7 +18,10 @@ public class BeanPostProcessor implements org.springframework.beans.factory.conf
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (CacheAware.class.isAssignableFrom(bean.getClass())) {
+    	if (bean.getClass().isAssignableFrom(RedisUtils.class)) {
+    		ObjectFactory.redisUtils = (RedisUtils) bean;
+    		ObjectFactory.redisUtils.initJedisPool();
+    	} else if (CacheAware.class.isAssignableFrom(bean.getClass())) {
             ObjectFactory.cacheAware = (CacheAware) bean;
         } else if (StorageAware.class.isAssignableFrom(bean.getClass())) {
             ObjectFactory.storageAware = (StorageAware) bean;
