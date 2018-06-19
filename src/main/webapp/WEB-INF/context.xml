@@ -27,6 +27,14 @@
     <bean class="nurteen.prometheus.pc.framework.ServerConfigProperties" id="serverConfigProperties">
         <property name="idGenPrefix" value="${server.idGenPrefix}"/>
         <property name="serverAddress" value="${server.serverAddress}"/>
+        <property name="redisHost" value="${redis.host}"/>
+        <property name="redisPassword" value="${redis.password}"/>
+        <property name="redisPort" value="${redis.port}"/>
+        <property name="redisTimeout" value="${redis.timeout}"/>
+        <property name="redisPoolMaxTotal" value="${redis.pool.maxTotal}"/>
+        <property name="redisPoolMaxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="redisPoolMaxWaitMillis" value="${redis.pool.maxWaitMillis}"/>
+        <property name="redisPoolTestOnBorrow" value="${redis.pool.testOnBorrow}"/>
     </bean>
 
     <bean class="nurteen.prometheus.pc.framework.web.socket.WsMessageDispatcher" id="wsMessageDispatcher">
