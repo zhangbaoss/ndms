@@ -13,9 +13,6 @@
 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	   http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 	
-	<bean id="springContextHelper" class="nurteen.prometheus.pc.framework.utils.SpringContextHelper">
-	</bean>
-
     <bean class="nurteen.prometheus.pc.framework.BeanPostProcessor" id="beanPostProcessor$forApplicationContext">
     </bean>
 
@@ -43,9 +40,6 @@
     <bean class="nurteen.prometheus.pc.framework.web.socket.WsMessageDispatcher" id="wsMessageDispatcher">
     </bean>
     
-    <bean class="nurteen.prometheus.pc.framework.utils.RedisUtils" id="redisUtils">
-    </bean>
-
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
         <property name="packagesToScan">
@@ -79,6 +73,7 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="nurteen.prometheus.pc.center.server.service"/>
+    <context:component-scan base-package="nurteen.prometheus.pc.framework.service"/>
 
     <!--
     <context:component-scan base-package="com.prometheus.pc.center.server.common.transfer.websocket.service">

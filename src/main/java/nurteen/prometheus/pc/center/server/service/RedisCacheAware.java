@@ -5,12 +5,9 @@ import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.entities.AccessTokenInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceOnlineInfo;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
-import nurteen.prometheus.pc.framework.session.SessionSharingSession;
 import nurteen.prometheus.pc.framework.utils.ContainerUtils;
 import nurteen.prometheus.pc.framework.utils.RedisUtils;
-import nurteen.prometheus.pc.framework.utils.SerializeUtil;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
@@ -18,9 +15,6 @@ import java.util.List;
 
 @Service
 public class RedisCacheAware extends CacheAware {
-
-	@Autowired
-	RedisUtils redisUtils;
 	
 	/**
 	 * 检查给定的accessToken是否存在
@@ -28,7 +22,7 @@ public class RedisCacheAware extends CacheAware {
     @Override
     public boolean hasAccessToken(String accessToken) {
         boolean exists = false;
-        try(Jedis jedis = redisUtils.getJedis()) {
+        try(Jedis jedis = RedisUtils.getJedis()) {
             exists = jedis.exists(accessToken);
         }
         catch (Exception e) {
@@ -43,7 +37,7 @@ public class RedisCacheAware extends CacheAware {
 	 */
     @Override
     public AccessTokenInfo getAccessTokenInfo(String accessToken) {
-    	try(Jedis jedis = redisUtils.getJedis()) {
+    	try(Jedis jedis = RedisUtils.getJedis()) {
             List<String> values = jedis.hmget(accessToken, "nuid", "ndid", "type");
 
             if (ContainerUtils.notNull(values, 3)) {
@@ -62,7 +56,7 @@ public class RedisCacheAware extends CacheAware {
      */
     @Override
     public void updateAccessToken(String accessToken, int timeout) {
-    	try(Jedis jedis = redisUtils.getJedis()) {
+    	try(Jedis jedis = RedisUtils.getJedis()) {
             jedis.expire(accessToken, timeout);
         }
         catch (Exception e) {
@@ -79,7 +73,7 @@ public class RedisCacheAware extends CacheAware {
 	 */
     @Override
     public void updateAccessToken(String accessToken, String nuid, String ndid, DeviceType type, int timeout) {
-        try(Jedis jedis = redisUtils.getJedis()) {
+        try(Jedis jedis = RedisUtils.getJedis()) {
             jedis.hmset(accessToken, ContainerUtils.make("nuid", nuid).put("ndid", ndid).put("type", Integer.toString(type.getValue())).get());
             jedis.expire(accessToken, timeout);
         }
@@ -93,7 +87,7 @@ public class RedisCacheAware extends CacheAware {
      */
     @Override
     public void addDevice(String ndid, String nuid, int type) {
-    	try(Jedis jedis = redisUtils.getJedis()) {
+    	try(Jedis jedis = RedisUtils.getJedis()) {
             jedis.hmset(ndid, ContainerUtils.make("nuid", nuid).put("type", Integer.toString(type)).put("serverNdid", ServerProperties.getNdid()).put("serverAddress", configProperties.getServerAddress()).get());
         }
         catch (Exception e) {
@@ -106,7 +100,7 @@ public class RedisCacheAware extends CacheAware {
      */
     @Override
     public void removeDevice(String ndid) {
-    	try(Jedis jedis = redisUtils.getJedis()) {
+    	try(Jedis jedis = RedisUtils.getJedis()) {
             jedis.del(ndid);
         }
         catch (Exception e) {
@@ -119,7 +113,7 @@ public class RedisCacheAware extends CacheAware {
      */
     @Override
     public DeviceOnlineInfo findDeviceOnlineInfo(String ndid) {
-    	try(Jedis jedis = redisUtils.getJedis()) {
+    	try(Jedis jedis = RedisUtils.getJedis()) {
             List<String> values = jedis.hmget(ndid, "nuid", "type", "serverNdid", "serverAddress");
 
             if (ContainerUtils.notNull(values, 4)) {
@@ -133,57 +127,4 @@ public class RedisCacheAware extends CacheAware {
         return null;
     }
 
-    /**
-     * 获取session
-     */
-	@Override
-	public SessionSharingSession getSession(String sessionId) {
-		try(Jedis jedis = redisUtils.getJedis()) {
-			SessionSharingSession sss = (SessionSharingSession)SerializeUtil.bytesToObj(jedis.get(SerializeUtil.objToBytes(sessionId)));
-			return sss;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	/**
-	 * 更新session过期时间
-	 */
-	@Override
-	public Long expire(Object key, int seconds) {
-		try(Jedis jedis = redisUtils.getJedis()) {
-			return jedis.expire(SerializeUtil.objToBytes(key), seconds);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	/**
-	 * 将session存入redis
-	 */
-	@Override
-	public void setSession(String sessionId, SessionSharingSession session) {
-		try(Jedis jedis = redisUtils.getJedis()) {
-			jedis.set(SerializeUtil.objToBytes(sessionId), SerializeUtil.objToBytes(session));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * 删除session
-	 */
-	@Override
-	public void delSession(String sessionId) {
-		if (sessionId == null) {
-			throw new IllegalArgumentException("sessionId can not null");
-		}
-		try(Jedis jedis = redisUtils.getJedis()) {
-			jedis.del(SerializeUtil.objToBytes(sessionId));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

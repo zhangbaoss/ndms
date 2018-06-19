@@ -10,18 +10,6 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!-- session共享START -->
-  <filter>
-    <filter-name>shareSessionFilter</filter-name>
-    <filter-class>nurteen.prometheus.pc.framework.session.SessionSharingFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>shareSessionFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
-  <!-- session共享END -->
 
   <servlet>
     <display-name>Spring MVC</display-name>
