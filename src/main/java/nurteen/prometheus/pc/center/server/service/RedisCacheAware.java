@@ -44,9 +44,7 @@ public class RedisCacheAware extends CacheAware {
     @Override
     public AccessTokenInfo getAccessTokenInfo(String accessToken) {
     	try(Jedis jedis = redisUtils.getJedis()) {
-            List<String> values;
-
-            values = jedis.hmget(accessToken, "nuid", "ndid", "type");
+            List<String> values = jedis.hmget(accessToken, "nuid", "ndid", "type");
 
             if (ContainerUtils.notNull(values, 3)) {
                 return new AccessTokenInfo(values.get(0), values.get(1), Integer.valueOf(values.get(2)));

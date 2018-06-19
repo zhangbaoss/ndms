@@ -12,6 +12,9 @@
 	   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	   http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+	
+	<bean id="springContextHelper" class="nurteen.prometheus.pc.framework.utils.SpringContextHelper">
+	</bean>
 
     <bean class="nurteen.prometheus.pc.framework.BeanPostProcessor" id="beanPostProcessor$forApplicationContext">
     </bean>
@@ -38,6 +41,9 @@
     </bean>
 
     <bean class="nurteen.prometheus.pc.framework.web.socket.WsMessageDispatcher" id="wsMessageDispatcher">
+    </bean>
+    
+    <bean class="nurteen.prometheus.pc.framework.utils.RedisUtils" id="redisUtils">
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

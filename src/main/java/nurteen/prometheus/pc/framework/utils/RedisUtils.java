@@ -17,6 +17,12 @@ public class RedisUtils {
 	
 	JedisPool jedisPool;
 	
+	/**
+	 * @Description: 初始化JedisPool
+	 * @date 2018年6月19日 上午11:47:16 
+	 * @throws 
+	 * @author zhangb
+	 */
 	public void initJedisPool() {
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setMaxTotal(configProperties.getRedisPoolMaxTotal());
