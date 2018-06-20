@@ -28,23 +28,23 @@ public class Argument {
         return new ValidateHelper().notNull(argument, message);
     }
 
-    public ValidateHelper notEmpty(String argument, String message) {
+    public static ValidateHelper notEmpty(String argument, String message) {
         return new ValidateHelper().notEmpty(argument, message);
     }
 
-    public <T> ValidateHelper notEmpty(Collection<T> argument, String message) {
+    public static <T> ValidateHelper notEmpty(Collection<T> argument, String message) {
         return new ValidateHelper().notEmpty(argument, message);
     }
 
-    public <K, V> ValidateHelper notEmpty(Map<K, V> argument, String message) {
+    public static <K, V> ValidateHelper notEmpty(Map<K, V> argument, String message) {
         return new ValidateHelper().notEmpty(argument, message);
     }
 
-    public ValidateHelper startsWith(String argument, String prefix, String message) {
+    public static ValidateHelper startsWith(String argument, String prefix, String message) {
         return new ValidateHelper().startsWith(argument, prefix, message);
     }
 
-    public ValidateHelper endsWith(String argument, String suffix, String message) {
+    public static ValidateHelper endsWith(String argument, String suffix, String message) {
         return new ValidateHelper().endsWith(argument, suffix, message);
     }
 
@@ -64,11 +64,11 @@ public class Argument {
         return new ValidateHelper().range(argument, min, max, message);
     }
 
-    public <T> ValidateHelper set(T argument, T[] values, String message) {
+    public static <T> ValidateHelper set(T argument, T[] values, String message) {
         return new ValidateHelper().set(argument, values, message);
     }
 
-    public <T> ValidateHelper set(T argument, Collection<T> values, String message) {
+    public static <T> ValidateHelper set(T argument, Collection<T> values, String message) {
         return new ValidateHelper().set(argument, values, message);
     }
 
