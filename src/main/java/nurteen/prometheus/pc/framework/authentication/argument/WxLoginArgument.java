@@ -9,7 +9,10 @@ public class WxLoginArgument extends LoginArgument {
     private static final String _wxaencfront = "prometheus.wxa.encfront[";
     private static final String _wxaencback = "]prometheus.wxa.encback";
 
+    @NotNull(message = "产品名称不能为空")
     String product;
+
+    @NotNull(message = "code不能为空")
     String code;
 
     @NotNull(message = "loginTime不能为空")

@@ -1,6 +1,7 @@
 package nurteen.prometheus.pc.framework.authentication.argument;
 
 import nurteen.prometheus.pc.framework.Argument;
+import nurteen.prometheus.pc.framework.entities.ApplicationType;
 import nurteen.prometheus.pc.framework.entities.DevicePlatform;
 import nurteen.prometheus.pc.framework.entities.DeviceType;
 import org.hibernate.validator.constraints.Range;
@@ -76,6 +77,20 @@ public class LoginArgument extends Argument {
                 case 6: return DevicePlatform.IOS;
                 case 7: return DevicePlatform.Android;
                 default: return null;
+            }
+        }
+        public ApplicationType getApplicationType() {
+            switch (this.getDeviceType()) {
+                case App_Mobile:
+                case Controller_Mobile:
+                    return ApplicationType.App_Mobile;
+                case App_Browser:
+                case App_Pc:
+                case Controller_Pc:
+                case Center_Pc:
+                    return ApplicationType.App_Website;
+                default:
+                    return null;
             }
         }
     }

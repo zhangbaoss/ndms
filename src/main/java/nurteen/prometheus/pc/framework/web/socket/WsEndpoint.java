@@ -99,6 +99,17 @@ public class WsEndpoint {
         return sendMsg(message);
     }
 
+    public boolean sendRequestBatchResp(WsMessage.Batch batch, Integer index, String url, String msgId, String payload) {
+        WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
+        message.type = WsMessageDispatcher.Message.Type.RequestBatchResp;
+        message.batch = batch;
+        message.index = index;
+        message.url = url;
+        message.msgId = msgId;
+        message.payload = payload;
+        return sendMsg(message);
+    }
+
     public boolean sendForwardReq(String url, String msgId, String target, String payload) {
         WsMessageDispatcher.Message message = new WsMessageDispatcher.Message();
         message.type = WsMessageDispatcher.Message.Type.ForwardReq;

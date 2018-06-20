@@ -348,17 +348,6 @@ public class WsMessageDispatcher {
         WsMessage.Batch batch;
         Integer index;
 
-        static Message requestBatchResp(WsMessage.Batch batch, Integer index, String url, String msgId, String payload) {
-            Message msg = new Message();
-            msg.type = Type.RequestBatchResp;
-            msg.batch = batch;
-            msg.index = index;
-            msg.url = url;
-            msg.msgId = msgId;
-            msg.payload = payload;
-            return msg;
-        }
-
         public Type getType() {
             return type;
         }

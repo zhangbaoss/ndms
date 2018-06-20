@@ -2,6 +2,7 @@ package nurteen.prometheus.pc.framework.web.socket;
 
 import nurteen.prometheus.pc.framework.ServerProperties;
 import nurteen.prometheus.pc.framework.utils.JsonUtils;
+import org.hibernate.engine.jdbc.batch.spi.Batch;
 
 public class WsMessage {
     WsEndpoint endpoint;
@@ -58,8 +59,22 @@ public class WsMessage {
     }
 
     public void responseBatch(Batch batch, String payload) {
-        message.index = (batch != Batch.Begin) ? (message.index + 1) : 0;
-        endpoint.sendMsg(WsMessageDispatcher.Message.requestBatchResp(batch, message.index, message.url, message.msgId, payload));
+        endpoint.sendRequestBatchResp(batch, genMessageIndex(batch), message.url, message.msgId, payload);
+    }
+
+    private Integer genMessageIndex(Batch batch) {
+        synchronized (message) {
+            switch (batch) {
+                case Begin:
+                    message.index = 0;
+                    break;
+                case Continue:
+                case End:
+                    message.index = (message.index == null) ? 0 : (message.index + 1);
+                    break;
+            }
+            return message.index;
+        }
     }
 
     public static enum Batch {
