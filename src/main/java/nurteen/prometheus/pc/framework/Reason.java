@@ -4,7 +4,9 @@ public class Reason {
     Status status;
     String message;
 
-    Reason(Status status, String message) {
+    public Reason() {
+    }
+    public Reason(Status status, String message) {
         this.status = status;
         this.message = message;
     }

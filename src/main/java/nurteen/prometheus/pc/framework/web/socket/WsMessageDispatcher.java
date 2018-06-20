@@ -331,7 +331,7 @@ public class WsMessageDispatcher {
     }
 
 
-    static class Message {
+    public static class Message {
         Message.Type type;      // 请求类型
         // "LoginReq": payload
         // "LoginResp": payload
@@ -404,7 +404,7 @@ public class WsMessageDispatcher {
             this.index = index;
         }
 
-        static enum Type {
+        public static enum Type {
             LoginReq,
             LoginResp,
             RequestReq,
@@ -415,7 +415,7 @@ public class WsMessageDispatcher {
             ForwardReachedResp,
         }
 
-        static class ReachedRespPayload {
+        public static class ReachedRespPayload {
             List<String> routes;
             Reason reason;
 
