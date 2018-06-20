@@ -24,8 +24,28 @@ public class Argument {
         }
     }
 
-    public static ValidateHelper notNull(Object argument, String message) throws InvalidArgumentException {
+    public static ValidateHelper notNull(Object argument, String message) {
         return new ValidateHelper().notNull(argument, message);
+    }
+
+    public ValidateHelper notEmpty(String argument, String message) {
+        return new ValidateHelper().notEmpty(argument, message);
+    }
+
+    public <T> ValidateHelper notEmpty(Collection<T> argument, String message) {
+        return new ValidateHelper().notEmpty(argument, message);
+    }
+
+    public <K, V> ValidateHelper notEmpty(Map<K, V> argument, String message) {
+        return new ValidateHelper().notEmpty(argument, message);
+    }
+
+    public ValidateHelper startsWith(String argument, String prefix, String message) {
+        return new ValidateHelper().startsWith(argument, prefix, message);
+    }
+
+    public ValidateHelper endsWith(String argument, String suffix, String message) {
+        return new ValidateHelper().endsWith(argument, suffix, message);
     }
 
     public static ValidateHelper length(String argument, int min, int max, String message) {
@@ -90,6 +110,41 @@ public class Argument {
 
         public ValidateHelper notNull(Object argument, String message) {
             if (argument == null) {
+                this.append(message);
+            }
+            return this;
+        }
+
+        public ValidateHelper notEmpty(String argument, String message) {
+            if (argument.isEmpty()) {
+                this.append(message);
+            }
+            return this;
+        }
+
+        public <T> ValidateHelper notEmpty(Collection<T> argument, String message) {
+            if (argument.isEmpty()) {
+                this.append(message);
+            }
+            return this;
+        }
+
+        public <K, V> ValidateHelper notEmpty(Map<K, V> argument, String message) {
+            if (argument.isEmpty()) {
+                this.append(message);
+            }
+            return this;
+        }
+
+        public ValidateHelper startsWith(String argument, String prefix, String message) {
+            if (!argument.startsWith(prefix)) {
+                this.append(message);
+            }
+            return this;
+        }
+
+        public ValidateHelper endsWith(String argument, String suffix, String message) {
+            if (!argument.endsWith(suffix)) {
                 this.append(message);
             }
             return this;
